@@ -17,7 +17,7 @@ OBJDIR 			= ./obj/
 
 DEPDIR 			= ./dep/
 
-SRCNAME			= test1.c test2.c test3.c
+SRCNAME			= main.c 
 
 SRCS = $(addprefix $(SRCPATH), $(SRCNAME))
 
