@@ -6,13 +6,13 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 15:31:02 by max               #+#    #+#             */
-/*   Updated: 2024/08/30 10:30:34 by max              ###   ########.fr       */
+/*   Updated: 2024/08/30 15:33:25 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-bool empty_arg(char **argv)
+static bool empty_arg(char **argv)
 {
     if (!argv[1][0] || !argv[2][0] || !argv[3][0] || !argv[4][0] || (argv[5] && !argv[5][0]))
     {
@@ -22,7 +22,7 @@ bool empty_arg(char **argv)
     return false;
 }
 
-bool argument_size_validation(t_args *args)
+static bool argument_size_validation(t_args *args)
 {
     if (args->number_of_philosophers == OVERFLOW || args->time_to_die == OVERFLOW || args->time_to_eat == OVERFLOW || args->time_to_sleep == OVERFLOW ||
         args->number_of_times_each_philosopher_must_eat == OVERFLOW)
@@ -33,7 +33,7 @@ bool argument_size_validation(t_args *args)
     return true;
 }
 
-bool init_data(t_args *args, char **argv)
+static bool init_data_args(t_args *args, char **argv)
 {
     if (empty_arg(argv))
         return false;
@@ -53,12 +53,12 @@ bool init_data(t_args *args, char **argv)
 
 bool parse(t_args *args, int argc, char **argv)
 {
-    (void)args;
+    
     if (!check_number_args(argc))
         return false;
     if (!check_has_only_number_in_args(argv))
         return false;
-    if (!init_data(args, argv))
+    if (!init_data_args(args, argv))
         return false;
     return true;
 }

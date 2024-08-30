@@ -6,23 +6,33 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 07:35:54 by max               #+#    #+#             */
-/*   Updated: 2024/08/29 21:46:51 by max              ###   ########.fr       */
+/*   Updated: 2024/08/30 16:02:28 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+bool init_data ( t_main_data *main_data)
+{
+    main_data->philosophers = malloc(sizeof(t_philosopher) * main_data->shared_data.args.number_of_philosophers);
+    if (main_data->philosophers == NULL)
+    {
+        print_error("Malloc failed");
+        return false;
+    }
+    return true;
+}
+
 int main(int argc, char **argv)
 {
-    t_args args = {0};
+ t_main_data main_data = {0};
 
-    if (parse(&args, argc, argv))
+  
+    if (parse(&(main_data.shared_data.args), argc, argv))
     {
-        printf("Number of philosophers: %d\n", args.number_of_philosophers);
-        printf("Time to die: %d ms\n", args.time_to_die);
-        printf("Time to eat: %d ms\n", args.time_to_eat);
-        printf("Time to sleep: %d ms\n", args.time_to_sleep);
-        printf("Number of times each philosopher must eat: %d\n", args.number_of_times_each_philosopher_must_eat);
+        print_args(main_data);
+        if (!init_data (&main_data))
+            
     }
     
     return 0;

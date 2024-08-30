@@ -17,10 +17,10 @@ OBJDIR 			= ./obj/
 
 DEPDIR 			= ./dep/
 
-SRCNAME			= main.c \
+SRCNAME			= main.c print_test.c \
 				  parse.c check_args.c \
 				  print_error.c \
-				  ft_atoi.c
+				  ft_atoi.c 
 
 SRCS = $(addprefix $(SRCPATH), $(SRCNAME))
 
