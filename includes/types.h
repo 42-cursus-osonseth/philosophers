@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 13:21:23 by max               #+#    #+#             */
-/*   Updated: 2024/08/30 15:27:39 by max              ###   ########.fr       */
+/*   Updated: 2024/08/30 19:14:55 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 typedef enum e_state
 {
+    CREATED,
     EATING,
     THINKING,
     SLEEPING,
@@ -32,8 +33,10 @@ typedef struct s_args
 
 typedef struct s_shared_data
 {
-
     t_args args;
+    pthread_mutex_t *forks;
+    pthread_mutex_t print_mutex;
+
 } t_shared_data;
 
 typedef struct s_philosopher

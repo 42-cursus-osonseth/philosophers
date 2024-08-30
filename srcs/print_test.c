@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 15:34:23 by max               #+#    #+#             */
-/*   Updated: 2024/08/30 15:35:46 by max              ###   ########.fr       */
+/*   Updated: 2024/08/30 18:36:17 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,4 +19,17 @@ void print_args(t_main_data main_data)
     printf("Time to eat: %d ms\n", main_data.shared_data.args.time_to_eat);
     printf("Time to sleep: %d ms\n", main_data.shared_data.args.time_to_sleep);
     printf("Number of times each philosopher must eat: %d\n", main_data.shared_data.args.number_of_times_each_philosopher_must_eat);
+}
+
+void print_main_data(t_main_data main_data)
+{
+    int i = 0;
+
+    while (i < main_data.shared_data.args.number_of_philosophers)
+    {
+        printf("Philosopher ID = %zu\n", main_data.philosophers[i].id);
+        printf("Philosopher state = %d\n", main_data.philosophers[i].state);
+        printf("Philosopher shared data = %p\n", main_data.philosophers[i].shared_data);
+        i++;
+    }
 }
