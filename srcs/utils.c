@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/27 07:36:02 by max               #+#    #+#             */
-/*   Updated: 2024/08/31 22:05:16 by max              ###   ########.fr       */
+/*   Created: 2024/08/31 12:53:26 by max               #+#    #+#             */
+/*   Updated: 2024/08/31 12:58:33 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H
-#define PHILO_H
+#include "philo.h"
 
-#include "config.h"
-#include "types.h"
-#include "prototypes.h"
-
-#endif
+long int get_timestamp_in_ms()
+{
+    struct timeval tv;
+    gettimeofday(&tv, NULL);
+    return (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
+}

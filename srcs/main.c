@@ -6,25 +6,75 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 07:35:54 by max               #+#    #+#             */
-/*   Updated: 2024/08/29 21:46:51 by max              ###   ########.fr       */
+/*   Updated: 2024/08/31 22:06:02 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+void philosopher_thinking(t_philosopher *philosopher)
+{
+    pthread_mutex_lock(&philosopher->shared_data->print_mutex);
+    printf(COLOR_GREEN "%13ld" COLOR_RESET COLOR_MAGENTA"%5zu"COLOR_RESET   COLOR_YELLOW"    is thinking"COLOR_RESET"\n",get_timestamp_in_ms(),philosopher->id);
+    pthread_mutex_unlock(&philosopher->shared_data->print_mutex);
+    usleep(philosopher->shared_data->args.time_to_eat * 1000);
+}
+void philosopher_sleeping(t_philosopher *philosopher)
+{
+    pthread_mutex_lock(&philosopher->shared_data->print_mutex);
+    printf(COLOR_GREEN "%13ld" COLOR_RESET COLOR_MAGENTA"%5zu"COLOR_RESET   COLOR_BLUE"    is sleeping"COLOR_RESET"\n", get_timestamp_in_ms(), philosopher->id);
+    pthread_mutex_unlock(&philosopher->shared_data->print_mutex);
+    usleep(philosopher->shared_data->args.time_to_sleep * 1000);
+}
+
+void *philosopher_routine(void *arg)
+{
+    
+    t_philosopher *philosopher = (t_philosopher *)arg;
+   
+    philosopher_sleeping(philosopher);
+    philosopher_thinking(philosopher);
+    
+
+    return NULL;
+}
+void execute(t_main_data *main_data)
+{
+    int i;
+    i = 0;
+    pthread_t threads[main_data->shared_data.args.number_of_philosophers];
+    while (i < main_data->shared_data.args.number_of_philosophers)
+    {
+        if (pthread_create(&threads[i], NULL, philosopher_routine, &main_data->philosophers[i]) != 0)
+        {
+            print_error("Thread creation failed");
+            return;
+        }
+        i++;
+    }
+    i = 0;
+    while (i < main_data->shared_data.args.number_of_philosophers)
+    {
+        pthread_join(threads[i], NULL);
+        i++;
+    }
+}
+
 int main(int argc, char **argv)
 {
-    t_args args = {0};
-
-    if (parse(&args, argc, argv))
-    {
-        printf("Number of philosophers: %d\n", args.number_of_philosophers);
-        printf("Time to die: %d ms\n", args.time_to_die);
-        printf("Time to eat: %d ms\n", args.time_to_eat);
-        printf("Time to sleep: %d ms\n", args.time_to_sleep);
-        printf("Number of times each philosopher must eat: %d\n", args.number_of_times_each_philosopher_must_eat);
-    }
+    t_main_data main_data = {0};
     
+
+    if (parse(&(main_data.shared_data.args), argc, argv))
+    {
+        print_args(main_data);
+        if (!init_data(&main_data))
+            return 1;
+        execute(&main_data);
+        print_main_data(main_data);
+    }
+    destroy_mutex_and_clean(&main_data, -1);
+
     return 0;
 }
 
