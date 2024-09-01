@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 13:21:23 by max               #+#    #+#             */
-/*   Updated: 2024/08/30 19:14:55 by max              ###   ########.fr       */
+/*   Updated: 2024/09/01 00:57:39 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ typedef enum e_state
     EATING,
     THINKING,
     SLEEPING,
+    DEAD,
+    
 } t_state;
 
 typedef struct s_args
@@ -42,6 +44,7 @@ typedef struct s_shared_data
 typedef struct s_philosopher
 {
     size_t id;
+    long int last_eaten_timestamp;
     t_state state;
     t_shared_data *shared_data;
 } t_philosopher;

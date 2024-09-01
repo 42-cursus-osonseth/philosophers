@@ -17,9 +17,9 @@ OBJDIR 			= ./obj/
 
 DEPDIR 			= ./dep/
 
-SRCNAME			= main.c print_test.c \
+SRCNAME			= main.c print_test.c philosopher_actions.c \
 				  parse.c check_args.c init_data.c \
-				  print_error.c \
+				  print_error.c print_state.c \
 				  ft_atoi.c utils.c\
 				  clean.c
 
