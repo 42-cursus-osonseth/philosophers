@@ -6,36 +6,11 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 10:03:21 by max               #+#    #+#             */
-/*   Updated: 2024/09/01 00:58:52 by max              ###   ########.fr       */
+/*   Updated: 2024/09/01 14:46:34 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-static bool init_mutex(t_main_data *main_data)
-{
-    int i;
-    i = 0;
-
-    while (i < main_data->shared_data.args.number_of_philosophers)
-    {
-        if (pthread_mutex_init(&main_data->shared_data.forks[i], NULL) != 0)
-        {
-            print_error("Mutex initialization failed");
-            destroy_mutex_and_clean(main_data, i);
-            return false;
-        }
-        i++;
-    }
-    if (pthread_mutex_init(&main_data->shared_data.print_mutex, NULL) != 0)
-    {
-        print_error("Print mutex initialization failed");
-        destroy_mutex_and_clean(main_data, -1);
-        return false;
-    }
-
-    return true;
-}
 
 static void init_philosopher(t_main_data *main_data)
 {

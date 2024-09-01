@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 13:21:23 by max               #+#    #+#             */
-/*   Updated: 2024/09/01 00:57:39 by max              ###   ########.fr       */
+/*   Updated: 2024/09/01 14:35:49 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,10 @@ typedef struct s_args
 typedef struct s_shared_data
 {
     t_args args;
+    bool philosopher_is_dead;
     pthread_mutex_t *forks;
     pthread_mutex_t print_mutex;
+    pthread_mutex_t death;
 
 } t_shared_data;
 
