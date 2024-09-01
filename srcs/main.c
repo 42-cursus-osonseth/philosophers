@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 07:35:54 by max               #+#    #+#             */
-/*   Updated: 2024/09/01 00:48:43 by max              ###   ########.fr       */
+/*   Updated: 2024/09/01 15:33:20 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,9 @@ int main(int argc, char **argv)
         if (!init_data(&main_data))
             return 1;
         execute(&main_data);
+        clean_and_destroy_all(&main_data);
     }
-    destroy_mutex_and_clean(&main_data, -1);
+   
 
     return 0;
 }
