@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 13:18:09 by max               #+#    #+#             */
-/*   Updated: 2024/09/01 00:43:56 by max              ###   ########.fr       */
+/*   Updated: 2024/09/01 21:15:06 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 #define COLOR_PINK "\033[38;5;205m"
 
 #define OVERFLOW -2
+#define CHECK_INTERVAL_MS 3
+#define CHECK_DEATH_MS 5
 
 #include <stdio.h>
 #include <stdlib.h>
