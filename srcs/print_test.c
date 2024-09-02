@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 15:34:23 by max               #+#    #+#             */
-/*   Updated: 2024/08/31 14:55:10 by max              ###   ########.fr       */
+/*   Updated: 2024/09/02 14:10:21 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void print_main_data(t_main_data main_data)
     while (i < main_data.shared_data.args.number_of_philosophers)
     {
         printf("Philosopher ID = %zu\n", main_data.philosophers[i].id);
-        printf("Philosopher state = %d\n", main_data.philosophers[i].state);
         printf("Philosopher shared data = %p\n", main_data.philosophers[i].shared_data);
         printf("Mutex %d address = %p\n", i, (void *)&main_data.shared_data.forks[i]);
         i++;

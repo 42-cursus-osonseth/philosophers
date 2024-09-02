@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 13:22:08 by max               #+#    #+#             */
-/*   Updated: 2024/09/01 21:17:17 by max              ###   ########.fr       */
+/*   Updated: 2024/09/02 14:48:09 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,13 @@
 #include "types.h"
 
 bool philosopher_is_dead(t_philosopher *philosopher);
-
-
 //------print test a delete -----------------------------------
 void print_args(t_main_data main_data);
 void print_main_data(t_main_data main_data);
 //------print_state--------------------------------------------
 void print_thinking(t_philosopher *philosopher);
 void print_sleeping(t_philosopher *philosopher);
-void print_takikng_forks(t_philosopher *philosopher);
+void print_taking_forks(t_philosopher *philosopher);
 void print_eating(t_philosopher *philosopher);
 //---------- Error --------------------------------------------
 void print_error(char *str);

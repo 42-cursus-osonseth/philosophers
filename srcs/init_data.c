@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 10:03:21 by max               #+#    #+#             */
-/*   Updated: 2024/09/01 14:46:34 by max              ###   ########.fr       */
+/*   Updated: 2024/09/02 14:09:44 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ static void init_philosopher(t_main_data *main_data)
     while (i < main_data->shared_data.args.number_of_philosophers)
     {
         main_data->philosophers[i].id = i + 1;
-        main_data->philosophers[i].state = CREATED;
         main_data->philosophers[i].shared_data = &(main_data->shared_data);
         main_data->philosophers[i].last_eaten_timestamp = 0;
         i++;

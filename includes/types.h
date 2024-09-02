@@ -6,22 +6,12 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 13:21:23 by max               #+#    #+#             */
-/*   Updated: 2024/09/01 14:35:49 by max              ###   ########.fr       */
+/*   Updated: 2024/09/02 14:09:32 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TYPES_H
 #define TYPES_H
-
-typedef enum e_state
-{
-    CREATED,
-    EATING,
-    THINKING,
-    SLEEPING,
-    DEAD,
-    
-} t_state;
 
 typedef struct s_args
 {
@@ -35,8 +25,8 @@ typedef struct s_args
 
 typedef struct s_shared_data
 {
-    t_args args;
     bool philosopher_is_dead;
+    t_args args;
     pthread_mutex_t *forks;
     pthread_mutex_t print_mutex;
     pthread_mutex_t death;
@@ -47,7 +37,6 @@ typedef struct s_philosopher
 {
     size_t id;
     long int last_eaten_timestamp;
-    t_state state;
     t_shared_data *shared_data;
 } t_philosopher;
 

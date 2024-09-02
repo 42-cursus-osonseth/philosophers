@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 12:53:26 by max               #+#    #+#             */
-/*   Updated: 2024/09/01 15:25:51 by max              ###   ########.fr       */
+/*   Updated: 2024/09/02 14:52:23 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,12 @@ long int ft_atoi(char *str)
 	if (result < 0 || result > INT_MAX)
 		return OVERFLOW;
 	return (result);
+}
+bool philosopher_is_dead(t_philosopher *philosopher)
+{
+    bool is_dead;
+    pthread_mutex_lock(&philosopher->shared_data->death);
+    is_dead = philosopher->shared_data->philosopher_is_dead;
+    pthread_mutex_unlock(&philosopher->shared_data->death);
+    return is_dead;
 }
