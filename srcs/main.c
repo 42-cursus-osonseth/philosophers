@@ -6,13 +6,13 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 07:35:54 by max               #+#    #+#             */
-/*   Updated: 2024/09/02 13:08:29 by max              ###   ########.fr       */
+/*   Updated: 2024/09/02 16:18:53 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void check_if_philosopher_is_dead(t_main_data *main_data)
+void monitoring_of_philosophers(t_main_data *main_data)
 {
     t_philosopher *philosophers = main_data->philosophers;
     int i;
@@ -20,7 +20,7 @@ void check_if_philosopher_is_dead(t_main_data *main_data)
     long int time;
     while (1)
     {
-        usleep(CHECK_DEATH_MS * 1000);
+        usleep(100);
         i = 0;
         any_dead = false;
         while (i < main_data->shared_data.args.number_of_philosophers)
@@ -33,7 +33,8 @@ void check_if_philosopher_is_dead(t_main_data *main_data)
                 pthread_mutex_unlock(&main_data->shared_data.death);
                 any_dead = true;
                 pthread_mutex_lock(&main_data->shared_data.print_mutex);
-                printf("%ld PHILO  %zu IS DEAD !!", get_timestamp_in_ms(), philosophers[i].id);
+                printf(COLOR_RED "%13ld" COLOR_RESET COLOR_RED " Philo %3zu" COLOR_RESET COLOR_RED "    IS DEAD !" COLOR_RESET "\n", get_timestamp_in_ms(), philosophers[i].id);
+                usleep(500);
                 pthread_mutex_unlock(&main_data->shared_data.print_mutex);
                 break;
             }
@@ -42,15 +43,6 @@ void check_if_philosopher_is_dead(t_main_data *main_data)
         if (any_dead)
             break;
     }
-}
-
-bool philosopher_is_dead(t_philosopher *philosopher)
-{
-    bool is_dead;
-    pthread_mutex_lock(&philosopher->shared_data->death);
-    is_dead = philosopher->shared_data->philosopher_is_dead;
-    pthread_mutex_unlock(&philosopher->shared_data->death);
-    return is_dead;
 }
 
 void *philosopher_routine(void *arg)
@@ -92,7 +84,7 @@ void execute(t_main_data *main_data)
         }
         i++;
     }
-    check_if_philosopher_is_dead(main_data);
+    monitoring_of_philosophers(main_data);
 }
 
 int main(int argc, char **argv)
@@ -100,7 +92,7 @@ int main(int argc, char **argv)
     t_main_data main_data = {0};
 
     if (parse(&(main_data.shared_data.args), argc, argv))
-    {
+    {   //print_args(main_data);
         if (!init_data(&main_data))
             return 1;
         execute(&main_data);
