@@ -6,22 +6,69 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 07:35:54 by max               #+#    #+#             */
-/*   Updated: 2024/09/01 15:33:20 by max              ###   ########.fr       */
+/*   Updated: 2024/09/02 13:08:29 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+void check_if_philosopher_is_dead(t_main_data *main_data)
+{
+    t_philosopher *philosophers = main_data->philosophers;
+    int i;
+    bool any_dead;
+    long int time;
+    while (1)
+    {
+        usleep(CHECK_DEATH_MS * 1000);
+        i = 0;
+        any_dead = false;
+        while (i < main_data->shared_data.args.number_of_philosophers)
+        {
+            time = get_timestamp_in_ms() - philosophers[i].last_eaten_timestamp;
+            if (time >= main_data->shared_data.args.time_to_die)
+            {
+                pthread_mutex_lock(&main_data->shared_data.death);
+                main_data->shared_data.philosopher_is_dead = true;
+                pthread_mutex_unlock(&main_data->shared_data.death);
+                any_dead = true;
+                pthread_mutex_lock(&main_data->shared_data.print_mutex);
+                printf("%ld PHILO  %zu IS DEAD !!", get_timestamp_in_ms(), philosophers[i].id);
+                pthread_mutex_unlock(&main_data->shared_data.print_mutex);
+                break;
+            }
+            i++;
+        }
+        if (any_dead)
+            break;
+    }
+}
+
+bool philosopher_is_dead(t_philosopher *philosopher)
+{
+    bool is_dead;
+    pthread_mutex_lock(&philosopher->shared_data->death);
+    is_dead = philosopher->shared_data->philosopher_is_dead;
+    pthread_mutex_unlock(&philosopher->shared_data->death);
+    return is_dead;
+}
+
 void *philosopher_routine(void *arg)
 {
 
     t_philosopher *philosopher = (t_philosopher *)arg;
-
+    philosopher->last_eaten_timestamp = get_timestamp_in_ms();
     while (1)
     {
-        philosopher_sleeping(philosopher);
-        philosopher_thinking(philosopher);
         philosopher_eating(philosopher);
+        if (philosopher_is_dead(philosopher))
+            break;
+        philosopher_sleeping(philosopher);
+        if (philosopher_is_dead(philosopher))
+            break;
+        philosopher_thinking(philosopher);
+        if (philosopher_is_dead(philosopher))
+            break;
     }
 
     return NULL;
@@ -38,14 +85,14 @@ void execute(t_main_data *main_data)
             print_error("Thread creation failed");
             return;
         }
+        if (pthread_detach(threads[i]) != 0)
+        {
+            print_error("Thread detach failed");
+            return;
+        }
         i++;
     }
-    i = 0;
-    while (i < main_data->shared_data.args.number_of_philosophers)
-    {
-        pthread_join(threads[i], NULL);
-        i++;
-    }
+    check_if_philosopher_is_dead(main_data);
 }
 
 int main(int argc, char **argv)
@@ -59,7 +106,6 @@ int main(int argc, char **argv)
         execute(&main_data);
         clean_and_destroy_all(&main_data);
     }
-   
 
     return 0;
 }

@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 13:22:08 by max               #+#    #+#             */
-/*   Updated: 2024/09/01 15:31:55 by max              ###   ########.fr       */
+/*   Updated: 2024/09/01 21:17:17 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 #define PROTOTYPES_H
 
 #include "types.h"
+
+bool philosopher_is_dead(t_philosopher *philosopher);
+
 
 //------print test a delete -----------------------------------
 void print_args(t_main_data main_data);
