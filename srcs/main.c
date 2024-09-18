@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 07:35:54 by max               #+#    #+#             */
-/*   Updated: 2024/09/18 15:21:23 by max              ###   ########.fr       */
+/*   Updated: 2024/09/18 15:27:25 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ void *philosopher_routine(void *arg)
     pthread_mutex_unlock(&philosopher->shared_data->time);
     while (1)
     {
+        if (philosopher_is_dead(philosopher))
+            break;
         philosopher_eating(philosopher);
         if (philosopher_is_dead(philosopher))
             break;
@@ -63,8 +65,7 @@ void *philosopher_routine(void *arg)
         if (philosopher_is_dead(philosopher))
             break;
         philosopher_thinking(philosopher);
-        if (philosopher_is_dead(philosopher))
-            break;
+
     }
 
     return NULL;
@@ -73,7 +74,7 @@ void execute(t_main_data *main_data)
 {
     int i;
     pthread_t threads[main_data->shared_data.args.number_of_philosophers];
-    
+
     main_data->shared_data.start_time = get_timestamp_in_ms();
     i = 0;
     while (i < main_data->shared_data.args.number_of_philosophers)

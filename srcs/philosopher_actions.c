@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 00:25:21 by max               #+#    #+#             */
-/*   Updated: 2024/09/18 13:16:55 by max              ###   ########.fr       */
+/*   Updated: 2024/09/18 15:31:01 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,10 @@ void philosopher_eating(t_philosopher *philosopher)
 {
     philosopher_take_forks(philosopher);
     if (philosopher_is_dead(philosopher))
+    {
+        philosopher_realease_forks(philosopher);
         return;
+    }
     pthread_mutex_lock(&philosopher->shared_data->time);
     philosopher->last_eaten_timestamp = get_timestamp_in_ms();
     pthread_mutex_unlock(&philosopher->shared_data->time);
