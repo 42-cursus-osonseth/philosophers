@@ -6,13 +6,13 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 14:45:34 by max               #+#    #+#             */
-/*   Updated: 2024/09/18 12:23:12 by max              ###   ########.fr       */
+/*   Updated: 2024/09/18 22:14:24 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static bool init_forks_mutex(t_main_data *main_data)
+bool init_forks_mutex(t_main_data *main_data)
 {
     int i;
 
@@ -31,7 +31,7 @@ static bool init_forks_mutex(t_main_data *main_data)
     return true;
 }
 
-static bool init_print_mutex(t_main_data *main_data)
+bool init_print_mutex(t_main_data *main_data)
 {
     if (pthread_mutex_init(&main_data->shared_data.print_mutex, NULL) != 0)
     {
@@ -42,7 +42,7 @@ static bool init_print_mutex(t_main_data *main_data)
     }
     return true;
 }
-static bool init_death_mutex(t_main_data *main_data)
+bool init_death_mutex(t_main_data *main_data)
 {
     if (pthread_mutex_init(&main_data->shared_data.death, NULL) != 0)
     {
@@ -54,7 +54,7 @@ static bool init_death_mutex(t_main_data *main_data)
     }
     return true;
 }
-static bool init_time_mutex(t_main_data *main_data)
+bool init_time_mutex(t_main_data *main_data)
 {
     if (pthread_mutex_init(&main_data->shared_data.time, NULL) != 0)
     {
@@ -67,15 +67,17 @@ static bool init_time_mutex(t_main_data *main_data)
     }
     return true;
 }
-bool init_mutex(t_main_data *main_data)
+bool init_meals_mutex (t_main_data *main_data)
 {
-    if (!init_forks_mutex(main_data))
+        if (pthread_mutex_init(&main_data->shared_data.meals, NULL) != 0)
+    {
+        print_error("Meals mutex initialization failed");
+        destroy_forks_mutex(main_data);
+        destroy_print_mutex(main_data);
+        destroy_death_mutex(main_data);
+        destroy_time_mutex (main_data);
+        clean_forks_and_philosophers(main_data);
         return false;
-    if (!init_print_mutex(main_data))
-        return false;
-    if (!init_death_mutex(main_data))
-        return false;
-    if (!init_time_mutex(main_data))
-        return false;
+    }
     return true;
 }

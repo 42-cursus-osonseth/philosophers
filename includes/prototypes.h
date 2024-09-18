@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 13:22:08 by max               #+#    #+#             */
-/*   Updated: 2024/09/18 12:36:54 by max              ###   ########.fr       */
+/*   Updated: 2024/09/18 22:17:36 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,26 @@ void print_thinking(t_philosopher *philosopher);
 void print_sleeping(t_philosopher *philosopher);
 void print_taking_forks(t_philosopher *philosopher);
 void print_eating(t_philosopher *philosopher);
-//---------- Error --------------------------------------------
+//---------- error --------------------------------------------
 void print_error(char *str);
-//---------- Parsing ------------------------------------------
-bool parse(t_args *args, int argc, char **argv);
+//---------- parsing ------------------------------------------
+bool parse(t_main_data *main_data, int argc, char **argv);
 bool check_has_only_number_in_args(char **argv);
 bool check_number_args(int argc);
 bool init_data(t_main_data *main_data);
 bool init_mutex(t_main_data *main_data);
+//----------init mutex ---------------------------------------
+bool init_forks_mutex(t_main_data *main_data);
+bool init_print_mutex(t_main_data *main_data);
+bool init_death_mutex(t_main_data *main_data);
+bool init_time_mutex(t_main_data *main_data);
 //----------cleaning-------------------------------------------
 void destroy_partial_forks_mutexs(t_main_data *main_data, int count);
 void destroy_forks_mutex(t_main_data *main_data);
 void destroy_print_mutex(t_main_data *main_data);
 void destroy_death_mutex(t_main_data *main_data);
 void destroy_time_mutex(t_main_data *main_data);
+void destroy_meals_mutex(t_main_data *main_data);
 void clean_philosopher(t_main_data *main_data);
 void clean_forks(t_main_data *main_data);
 void clean_forks_and_philosophers(t_main_data *main_data);

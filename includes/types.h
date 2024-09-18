@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 13:21:23 by max               #+#    #+#             */
-/*   Updated: 2024/09/18 15:11:27 by max              ###   ########.fr       */
+/*   Updated: 2024/09/18 22:13:49 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ typedef struct s_shared_data
     pthread_mutex_t print_mutex;
     pthread_mutex_t death;
     pthread_mutex_t time;
+    pthread_mutex_t meals;
+    
 
 } t_shared_data;
 
@@ -40,11 +42,13 @@ typedef struct s_philosopher
 {
     size_t id;
     long int last_eaten_timestamp;
+    int meals_number;
     t_shared_data *shared_data;
 } t_philosopher;
 
 typedef struct s_main_data
 {
+    bool has_meal_limit;
     t_philosopher *philosophers;
     t_shared_data shared_data;
 } t_main_data;

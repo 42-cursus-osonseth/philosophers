@@ -21,7 +21,7 @@ SRCNAME			= main.c print_test.c philosopher_actions.c \
 				  parse.c check_args.c init_data.c init_mutex.c \
 				  print_error.c print_state.c \
 				  utils.c \
-				  clean_memory.c destroy_mutex.c
+				  clean_memory.c destroy_mutex.c destroy_mutex2.c
 
 
 SRCS = $(addprefix $(SRCPATH), $(SRCNAME))

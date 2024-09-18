@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 15:31:02 by max               #+#    #+#             */
-/*   Updated: 2024/09/18 12:18:50 by max              ###   ########.fr       */
+/*   Updated: 2024/09/18 18:10:21 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static bool argument_size_validation(t_args *args)
     return true;
 }
 
-static bool init_data_args(t_args *args, char **argv)
+static bool init_data_args(t_main_data *main_data, t_args *args, char **argv)
 {
     if (empty_arg(argv))
         return false;
@@ -55,7 +55,10 @@ static bool init_data_args(t_args *args, char **argv)
     args->time_to_sleep = (int)ft_atoi(argv[4]);
 
     if (argv[5])
+    {
         args->number_of_times_each_philosopher_must_eat = (int)ft_atoi(argv[5]);
+        main_data->has_meal_limit = true;
+    }
     else
         args->number_of_times_each_philosopher_must_eat = -1;
     if (!argument_size_validation(args))
@@ -63,13 +66,13 @@ static bool init_data_args(t_args *args, char **argv)
     return true;
 }
 
-bool parse(t_args *args, int argc, char **argv)
+bool parse(t_main_data *main_data, int argc, char **argv)
 {
     if (!check_number_args(argc))
         return false;
     if (!check_has_only_number_in_args(argv))
         return false;
-    if (!init_data_args(args, argv))
+    if (!init_data_args(main_data, &(main_data->shared_data.args), argv))
         return false;
     return true;
 }

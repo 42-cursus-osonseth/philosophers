@@ -6,11 +6,24 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 10:03:21 by max               #+#    #+#             */
-/*   Updated: 2024/09/02 14:09:44 by max              ###   ########.fr       */
+/*   Updated: 2024/09/18 19:03:15 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+bool init_mutex(t_main_data *main_data)
+{
+    if (!init_forks_mutex(main_data))
+        return false;
+    if (!init_print_mutex(main_data))
+        return false;
+    if (!init_death_mutex(main_data))
+        return false;
+    if (!init_time_mutex(main_data))
+        return false;
+    return true;
+}
 
 static void init_philosopher(t_main_data *main_data)
 {
@@ -22,6 +35,7 @@ static void init_philosopher(t_main_data *main_data)
         main_data->philosophers[i].id = i + 1;
         main_data->philosophers[i].shared_data = &(main_data->shared_data);
         main_data->philosophers[i].last_eaten_timestamp = 0;
+        main_data->philosophers[i].meals_number = main_data->philosophers->shared_data->args.number_of_times_each_philosopher_must_eat;
         i++;
     }
 }

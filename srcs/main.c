@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 07:35:54 by max               #+#    #+#             */
-/*   Updated: 2024/09/18 15:27:25 by max              ###   ########.fr       */
+/*   Updated: 2024/09/18 22:20:03 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,13 @@ void monitoring_of_philosophers(t_main_data *main_data)
     int i;
     bool any_dead;
     long int time;
+    int meals;
     while (1)
     {
         usleep(100);
         i = 0;
         any_dead = false;
+        meals = 0;
         while (i < main_data->shared_data.args.number_of_philosophers)
         {
             pthread_mutex_lock(&main_data->shared_data.time);
@@ -40,10 +42,23 @@ void monitoring_of_philosophers(t_main_data *main_data)
                 pthread_mutex_unlock(&main_data->shared_data.print_mutex);
                 break;
             }
+            pthread_mutex_lock(&main_data->shared_data.meals);
+            meals += main_data->philosophers[i].meals_number;
+            pthread_mutex_unlock(&main_data->shared_data.meals);
             i++;
         }
         if (any_dead)
             break;
+
+        if (main_data->has_meal_limit && meals == 0)
+        {
+            pthread_mutex_lock(&main_data->shared_data.print_mutex);
+            printf(COLOR_GREEN "%13ld " COLOR_RESET, get_timestamp_in_ms() - main_data->shared_data.start_time);
+            print_error("All philosophers have finished their meals, the simulation stops.");
+            usleep(500);
+            pthread_mutex_unlock(&main_data->shared_data.print_mutex);
+            break;
+        }
     }
 }
 
@@ -59,13 +74,12 @@ void *philosopher_routine(void *arg)
         if (philosopher_is_dead(philosopher))
             break;
         philosopher_eating(philosopher);
-        if (philosopher_is_dead(philosopher))
+        if (philosopher_is_dead(philosopher) || philosopher->meals_number == 0)
             break;
         philosopher_sleeping(philosopher);
         if (philosopher_is_dead(philosopher))
             break;
         philosopher_thinking(philosopher);
-
     }
 
     return NULL;
@@ -102,7 +116,7 @@ void execute(t_main_data *main_data)
 int main(int argc, char **argv)
 {
     t_main_data main_data = {0};
-    if (parse(&(main_data.shared_data.args), argc, argv))
+    if (parse(&main_data, argc, argv))
     { // print_args(main_data);
         if (!init_data(&main_data))
             return 1;

@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 18:41:48 by max               #+#    #+#             */
-/*   Updated: 2024/09/18 12:37:09 by max              ###   ########.fr       */
+/*   Updated: 2024/09/18 22:17:47 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,6 @@ void clean_and_destroy_all(t_main_data *main_data)
     destroy_print_mutex(main_data);
     destroy_death_mutex(main_data);
     destroy_time_mutex(main_data);
+    destroy_meals_mutex(main_data);
     clean_forks_and_philosophers(main_data);
 }
