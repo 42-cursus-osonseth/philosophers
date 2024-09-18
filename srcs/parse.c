@@ -6,11 +6,21 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 15:31:02 by max               #+#    #+#             */
-/*   Updated: 2024/08/31 22:07:45 by max              ###   ########.fr       */
+/*   Updated: 2024/09/18 12:18:50 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+static bool have_philosopher(char **argv)
+{
+    if (argv[1][0] == '0')
+    {
+        print_error("Error: The simulation cannot start because the number of philosophers is 0.");
+        return false;
+    }
+    return true;
+}
 
 static bool empty_arg(char **argv)
 {
@@ -36,6 +46,8 @@ static bool argument_size_validation(t_args *args)
 static bool init_data_args(t_args *args, char **argv)
 {
     if (empty_arg(argv))
+        return false;
+    if (!have_philosopher(argv))
         return false;
     args->number_of_philosophers = (int)ft_atoi(argv[1]);
     args->time_to_die = (int)ft_atoi(argv[2]);
