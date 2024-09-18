@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 13:21:23 by max               #+#    #+#             */
-/*   Updated: 2024/09/02 14:09:32 by max              ###   ########.fr       */
+/*   Updated: 2024/09/18 12:21:29 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_shared_data
     pthread_mutex_t *forks;
     pthread_mutex_t print_mutex;
     pthread_mutex_t death;
+    pthread_mutex_t time;
 
 } t_shared_data;
 

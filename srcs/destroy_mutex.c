@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 15:24:54 by max               #+#    #+#             */
-/*   Updated: 2024/09/01 15:27:40 by max              ###   ########.fr       */
+/*   Updated: 2024/09/18 12:36:11 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@ void destroy_print_mutex(t_main_data *main_data)
 void destroy_death_mutex(t_main_data *main_data)
 {
     pthread_mutex_destroy(&main_data->shared_data.death);
+}
+void destroy_time_mutex(t_main_data *main_data)
+{
+    pthread_mutex_destroy(&main_data->shared_data.time);
 }
 
 void destroy_partial_forks_mutexs(t_main_data *main_data, int count)

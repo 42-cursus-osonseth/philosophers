@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 07:35:54 by max               #+#    #+#             */
-/*   Updated: 2024/09/02 16:18:53 by max              ###   ########.fr       */
+/*   Updated: 2024/09/18 12:44:09 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ void monitoring_of_philosophers(t_main_data *main_data)
         any_dead = false;
         while (i < main_data->shared_data.args.number_of_philosophers)
         {
+            pthread_mutex_lock(&main_data->shared_data.time);
             time = get_timestamp_in_ms() - philosophers[i].last_eaten_timestamp;
+            pthread_mutex_unlock(&main_data->shared_data.time);
             if (time >= main_data->shared_data.args.time_to_die)
             {
                 pthread_mutex_lock(&main_data->shared_data.death);
@@ -49,7 +51,9 @@ void *philosopher_routine(void *arg)
 {
 
     t_philosopher *philosopher = (t_philosopher *)arg;
+    pthread_mutex_lock(&philosopher->shared_data->time);
     philosopher->last_eaten_timestamp = get_timestamp_in_ms();
+    pthread_mutex_unlock(&philosopher->shared_data->time);
     while (1)
     {
         philosopher_eating(philosopher);
@@ -68,8 +72,9 @@ void *philosopher_routine(void *arg)
 void execute(t_main_data *main_data)
 {
     int i;
-    i = 0;
     pthread_t threads[main_data->shared_data.args.number_of_philosophers];
+
+    i = 0;
     while (i < main_data->shared_data.args.number_of_philosophers)
     {
         if (pthread_create(&threads[i], NULL, philosopher_routine, &main_data->philosophers[i]) != 0)
@@ -77,14 +82,19 @@ void execute(t_main_data *main_data)
             print_error("Thread creation failed");
             return;
         }
-        if (pthread_detach(threads[i]) != 0)
+        i++;
+    }
+    monitoring_of_philosophers(main_data);
+    i = 0;
+    while (i < main_data->shared_data.args.number_of_philosophers)
+    {
+        if (pthread_join(threads[i], NULL) != 0)
         {
-            print_error("Thread detach failed");
+            print_error("Thread join failed");
             return;
         }
         i++;
     }
-    monitoring_of_philosophers(main_data);
 }
 
 int main(int argc, char **argv)
@@ -92,7 +102,7 @@ int main(int argc, char **argv)
     t_main_data main_data = {0};
 
     if (parse(&(main_data.shared_data.args), argc, argv))
-    {   //print_args(main_data);
+    { // print_args(main_data);
         if (!init_data(&main_data))
             return 1;
         execute(&main_data);

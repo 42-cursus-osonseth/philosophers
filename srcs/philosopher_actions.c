@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 00:25:21 by max               #+#    #+#             */
-/*   Updated: 2024/09/02 16:08:44 by max              ###   ########.fr       */
+/*   Updated: 2024/09/18 13:16:55 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,15 @@ void philosopher_take_forks(t_philosopher *philosopher)
     left_fork = philosopher->id - 1;
     right_fork = philosopher->id % philosopher->shared_data->args.number_of_philosophers;
 
+    if (philosopher->shared_data->args.number_of_philosophers == 1)
+    {
+        pthread_mutex_lock(&philosopher->shared_data->forks[0]);
+        print_taking_forks(philosopher);
+        while (!philosopher_is_dead(philosopher))
+            usleep(1000);
+        pthread_mutex_unlock(&philosopher->shared_data->forks[0]);
+        return;
+    }
     if (philosopher->id % 2 == 0)
     {
         pthread_mutex_lock(&philosopher->shared_data->forks[left_fork]);
@@ -87,7 +96,11 @@ void philosopher_sleeping(t_philosopher *philosopher)
 void philosopher_eating(t_philosopher *philosopher)
 {
     philosopher_take_forks(philosopher);
+    if (philosopher_is_dead(philosopher))
+        return;
+    pthread_mutex_lock(&philosopher->shared_data->time);
     philosopher->last_eaten_timestamp = get_timestamp_in_ms();
+    pthread_mutex_unlock(&philosopher->shared_data->time);
     print_eating(philosopher);
     usleep(philosopher->shared_data->args.time_to_eat * 1000);
     philosopher_realease_forks(philosopher);

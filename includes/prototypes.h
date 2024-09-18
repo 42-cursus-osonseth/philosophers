@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 13:22:08 by max               #+#    #+#             */
-/*   Updated: 2024/09/02 14:48:09 by max              ###   ########.fr       */
+/*   Updated: 2024/09/18 12:36:54 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void destroy_partial_forks_mutexs(t_main_data *main_data, int count);
 void destroy_forks_mutex(t_main_data *main_data);
 void destroy_print_mutex(t_main_data *main_data);
 void destroy_death_mutex(t_main_data *main_data);
+void destroy_time_mutex(t_main_data *main_data);
 void clean_philosopher(t_main_data *main_data);
 void clean_forks(t_main_data *main_data);
 void clean_forks_and_philosophers(t_main_data *main_data);
