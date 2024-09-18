@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 07:35:54 by max               #+#    #+#             */
-/*   Updated: 2024/09/18 12:44:09 by max              ###   ########.fr       */
+/*   Updated: 2024/09/18 15:21:23 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void monitoring_of_philosophers(t_main_data *main_data)
                 pthread_mutex_unlock(&main_data->shared_data.death);
                 any_dead = true;
                 pthread_mutex_lock(&main_data->shared_data.print_mutex);
-                printf(COLOR_RED "%13ld" COLOR_RESET COLOR_RED " Philo %3zu" COLOR_RESET COLOR_RED "    IS DEAD !" COLOR_RESET "\n", get_timestamp_in_ms(), philosophers[i].id);
+                printf(COLOR_RED "%13ld" COLOR_RESET COLOR_RED " Philo %3zu" COLOR_RESET COLOR_RED "    IS DEAD !" COLOR_RESET "\n", get_timestamp_in_ms() - main_data->shared_data.start_time, philosophers[i].id);
                 usleep(500);
                 pthread_mutex_unlock(&main_data->shared_data.print_mutex);
                 break;
@@ -73,7 +73,8 @@ void execute(t_main_data *main_data)
 {
     int i;
     pthread_t threads[main_data->shared_data.args.number_of_philosophers];
-
+    
+    main_data->shared_data.start_time = get_timestamp_in_ms();
     i = 0;
     while (i < main_data->shared_data.args.number_of_philosophers)
     {
@@ -100,7 +101,6 @@ void execute(t_main_data *main_data)
 int main(int argc, char **argv)
 {
     t_main_data main_data = {0};
-
     if (parse(&(main_data.shared_data.args), argc, argv))
     { // print_args(main_data);
         if (!init_data(&main_data))
