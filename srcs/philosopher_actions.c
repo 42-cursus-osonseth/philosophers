@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 00:25:21 by max               #+#    #+#             */
-/*   Updated: 2024/09/19 23:18:57 by max              ###   ########.fr       */
+/*   Updated: 2024/09/19 23:42:19 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,26 +60,15 @@ void philosopher_take_forks(t_philosopher *philosopher)
         print_taking_forks(philosopher);
     }
 }
-
 void philosopher_thinking(t_philosopher *philosopher)
 {
-
     long thinking_time;
-    long factor;
-    pthread_mutex_lock(&philosopher->shared_data->print_mutex);
-    factor = (philosopher->shared_data->args.time_to_die - philosopher->shared_data->args.time_to_eat - philosopher->shared_data->args.time_to_sleep) / philosopher->shared_data->args.number_of_philosophers;
-    if (philosopher_is_dead(philosopher))
-    {
-        pthread_mutex_unlock(&philosopher->shared_data->print_mutex);
-        return;
-    }
-    pthread_mutex_unlock(&philosopher->shared_data->print_mutex);
+    
     if (philosopher->id % 2 == 0)
-    {
-        thinking_time = factor * 1000;
-    }
+        thinking_time = 400;
+    
     else
-        thinking_time = factor * 500;
+        thinking_time = 200;
     print_thinking(philosopher);
     usleep(thinking_time);
 }
