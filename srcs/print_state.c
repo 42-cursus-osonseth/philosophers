@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 00:31:46 by max               #+#    #+#             */
-/*   Updated: 2024/09/18 15:39:03 by max              ###   ########.fr       */
+/*   Updated: 2024/09/19 08:18:40 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,12 @@ void print_eating(t_philosopher *philosopher)
     philosopher->shared_data->timestamp = get_timestamp_in_ms() - philosopher->shared_data->start_time;
     printf(COLOR_GREEN "%13ld" COLOR_RESET COLOR_MAGENTA " Philo %3zu" COLOR_RESET COLOR_BLUE "     is eating" COLOR_RESET "\n", philosopher->shared_data->timestamp, philosopher->id);
     pthread_mutex_unlock(&philosopher->shared_data->print_mutex);
+}
+void print_simulation_stop(t_main_data *main_data)
+{
+    pthread_mutex_lock(&main_data->shared_data.print_mutex);
+    printf(COLOR_GREEN "%13ld " COLOR_RESET, get_timestamp_in_ms() - main_data->shared_data.start_time);
+    print_error("All philosophers have finished their meals, the simulation stops.");
+    usleep(500);
+    pthread_mutex_unlock(&main_data->shared_data.print_mutex);
 }
