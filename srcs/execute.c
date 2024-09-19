@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 08:11:17 by max               #+#    #+#             */
-/*   Updated: 2024/09/20 00:32:34 by max              ###   ########.fr       */
+/*   Updated: 2024/09/20 01:09:22 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,16 @@ void *philosopher_routine(void *arg)
 {
 
     t_philosopher *philosopher = (t_philosopher *)arg;
+    while (1)
+    {
+         pthread_mutex_lock(&philosopher->shared_data->start);
+         if (philosopher->shared_data->start_flag == true)
+         {
+            pthread_mutex_unlock(&philosopher->shared_data->start);
+            break;
+         }
+         pthread_mutex_unlock(&philosopher->shared_data->start);
+    }
     update_last_eaten_timestamp(philosopher);
     while (1)
     {
@@ -78,8 +88,6 @@ void execute(t_main_data *main_data)
 {
     int i;
     pthread_t threads[main_data->shared_data.args.number_of_philosophers];
-
-    main_data->shared_data.start_time = get_timestamp_in_ms();
     i = 0;
     while (i < main_data->shared_data.args.number_of_philosophers)
     {
@@ -90,6 +98,11 @@ void execute(t_main_data *main_data)
         }
         i++;
     }
+    pthread_mutex_lock(&main_data->shared_data.start);
+    main_data->shared_data.start_time = get_timestamp_in_ms();
+    main_data->shared_data.start_flag = true;
+    pthread_mutex_unlock(&main_data->shared_data.start);
+    usleep(1000);
     monitoring_of_philosophers(main_data);
     i = 0;
     while (i < main_data->shared_data.args.number_of_philosophers)

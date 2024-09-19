@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 13:22:08 by max               #+#    #+#             */
-/*   Updated: 2024/09/20 00:23:49 by max              ###   ########.fr       */
+/*   Updated: 2024/09/20 00:51:28 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ bool parse(t_main_data *main_data, int argc, char **argv);
 bool check_has_only_number_in_args(char **argv);
 bool check_number_args(int argc);
 bool init_data(t_main_data *main_data);
-bool init_mutex(t_main_data *main_data);
 //--------------------- parse_utils ----------------------------
 void init_args (t_args *args, char ** argv);
 bool init_meal_count (t_main_data *main_data, t_args *args, char **argv);
@@ -61,6 +60,7 @@ void destroy_print_mutex(t_main_data *main_data);
 void destroy_death_mutex(t_main_data *main_data);
 void destroy_time_mutex(t_main_data *main_data);
 void destroy_meals_mutex(t_main_data *main_data);
+void destroy_start_mutex(t_main_data *main_data);
 void clean_philosopher(t_main_data *main_data);
 void clean_forks(t_main_data *main_data);
 void clean_forks_and_philosophers(t_main_data *main_data);

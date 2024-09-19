@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 07:35:54 by max               #+#    #+#             */
-/*   Updated: 2024/09/19 08:13:05 by max              ###   ########.fr       */
+/*   Updated: 2024/09/20 00:44:35 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,5 @@ int main(int argc, char **argv)
         execute(&main_data);
         clean_and_destroy_all(&main_data);
     }
-
     return 0;
 }
