@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 08:21:10 by max               #+#    #+#             */
-/*   Updated: 2024/09/19 09:18:40 by max              ###   ########.fr       */
+/*   Updated: 2024/09/20 00:04:00 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,6 @@ void handle_one_philosopher(t_philosopher *philosopher)
     pthread_mutex_lock(&philosopher->shared_data->forks[0]);
     print_taking_forks(philosopher);
     while (!philosopher_is_dead(philosopher))
-        usleep(1000);
+        usleep(50);
     pthread_mutex_unlock(&philosopher->shared_data->forks[0]);
 }
