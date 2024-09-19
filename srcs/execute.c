@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 08:11:17 by max               #+#    #+#             */
-/*   Updated: 2024/09/19 08:45:03 by max              ###   ########.fr       */
+/*   Updated: 2024/09/19 09:04:51 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,33 +27,26 @@ void handle_philosopher_is_dead(t_main_data *main_data, int i)
 
 void monitoring_of_philosophers(t_main_data *main_data)
 {
-    t_philosopher *philosophers = main_data->philosophers;
     int i;
-    long int time;
-    int meals;
+
     while (1)
     {
         usleep(100);
         i = 0;
-        meals = 0;
-        while (i < main_data->shared_data.args.number_of_philosophers)
+        main_data->meals = 0;
+        while (i++ < main_data->shared_data.args.number_of_philosophers)
         {
-            pthread_mutex_lock(&main_data->shared_data.time);
-            time = get_timestamp_in_ms() - philosophers[i].last_eaten_timestamp;
-            pthread_mutex_unlock(&main_data->shared_data.time);
-            if (time >= main_data->shared_data.args.time_to_die)
+            update_time_since_last_meal(main_data, i - 1);
+            if (main_data->time_since_last_meal >= main_data->shared_data.args.time_to_die)
             {
-                handle_philosopher_is_dead(main_data, i);
+                handle_philosopher_is_dead(main_data, i - 1);
                 break;
             }
-            pthread_mutex_lock(&main_data->shared_data.meals);
-            meals += main_data->philosophers[i].meals_number;
-            pthread_mutex_unlock(&main_data->shared_data.meals);
-            i++;
+            update_limit_meals(main_data, i - 1);
         }
         if (main_data->any_dead)
             break;
-        if (main_data->has_meal_limit && meals == 0)
+        if (main_data->has_meal_limit && main_data->meals == 0)
         {
             print_simulation_stop(main_data);
             break;

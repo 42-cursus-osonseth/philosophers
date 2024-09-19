@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 13:22:08 by max               #+#    #+#             */
-/*   Updated: 2024/09/19 08:24:44 by max              ###   ########.fr       */
+/*   Updated: 2024/09/19 09:13:05 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void print_thinking(t_philosopher *philosopher);
 void print_sleeping(t_philosopher *philosopher);
 void print_taking_forks(t_philosopher *philosopher);
 void print_eating(t_philosopher *philosopher);
-void print_simulation_stop (t_main_data *main_data);
+void print_simulation_stop(t_main_data *main_data);
 void print_error(char *str);
 //---------------------- parsing -------------------------------
 bool parse(t_main_data *main_data, int argc, char **argv);
@@ -39,6 +39,10 @@ bool init_time_mutex(t_main_data *main_data);
 void monitoring_of_philosophers(t_main_data *main_data);
 void *philosopher_routine(void *arg);
 void execute(t_main_data *main_data);
+//------------------- execute utils ----------------------------
+void update_time_since_last_meal(t_main_data *main_data, int i);
+void update_limit_meals(t_main_data *main_data, int i);
+void handle_one_philosopher(t_philosopher *philosopher);
 //--------------------- cleaning -------------------------------
 void destroy_partial_forks_mutexs(t_main_data *main_data, int count);
 void destroy_forks_mutex(t_main_data *main_data);
