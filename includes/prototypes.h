@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 13:22:08 by max               #+#    #+#             */
-/*   Updated: 2024/09/19 09:13:05 by max              ###   ########.fr       */
+/*   Updated: 2024/09/19 23:12:25 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,15 @@ void clean_philosopher(t_main_data *main_data);
 void clean_forks(t_main_data *main_data);
 void clean_forks_and_philosophers(t_main_data *main_data);
 void clean_and_destroy_all(t_main_data *main_data);
-//------------------ philosopher_action ------------------------
+//------------------ philosopher actions ------------------------
 void philosopher_realease_forks(t_philosopher *philosopher);
 void philosopher_take_forks(t_philosopher *philosopher);
 void philosopher_thinking(t_philosopher *philosopher);
 void philosopher_sleeping(t_philosopher *philosopher);
 void philosopher_eating(t_philosopher *philosopher);
+//---------------- philosopher actions utils --------------------
+void sleeping_usleep(t_philosopher *philosopher);
+void eating_usleep(t_philosopher *philosopher);
 //------------------------ utils --------------------------------
 long int get_timestamp_in_ms();
 long int ft_atoi(char *str);

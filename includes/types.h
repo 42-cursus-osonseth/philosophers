@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 13:21:23 by max               #+#    #+#             */
-/*   Updated: 2024/09/19 08:52:24 by max              ###   ########.fr       */
+/*   Updated: 2024/09/19 23:05:34 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@ typedef struct s_philosopher
     size_t id;
     long int last_eaten_timestamp;
     int meals_number;
+    long int action_start_time;
+    long int action_current_time;
+    long int action_time_elapsed;
     t_shared_data *shared_data;
 } t_philosopher;
 

@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 00:25:21 by max               #+#    #+#             */
-/*   Updated: 2024/09/19 09:22:05 by max              ###   ########.fr       */
+/*   Updated: 2024/09/19 23:18:57 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void philosopher_thinking(t_philosopher *philosopher)
 void philosopher_sleeping(t_philosopher *philosopher)
 {
     print_sleeping(philosopher);
-    usleep(philosopher->shared_data->args.time_to_sleep * 1000);
+    sleeping_usleep(philosopher);
 }
 
 void philosopher_eating(t_philosopher *philosopher)
@@ -102,7 +102,7 @@ void philosopher_eating(t_philosopher *philosopher)
     philosopher->last_eaten_timestamp = get_timestamp_in_ms();
     pthread_mutex_unlock(&philosopher->shared_data->time);
     print_eating(philosopher);
-    usleep(philosopher->shared_data->args.time_to_eat * 1000);
+    eating_usleep(philosopher);
     philosopher_realease_forks(philosopher);
     if (philosopher->meals_number > 0)
     {

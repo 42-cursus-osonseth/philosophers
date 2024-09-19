@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 00:31:46 by max               #+#    #+#             */
-/*   Updated: 2024/09/19 08:18:40 by max              ###   ########.fr       */
+/*   Updated: 2024/09/19 23:07:56 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void print_sleeping(t_philosopher *philosopher)
         return;
     }
     philosopher->shared_data->timestamp = get_timestamp_in_ms() - philosopher->shared_data->start_time;
+    philosopher->action_start_time = get_timestamp_in_ms();
     printf(COLOR_GREEN "%13ld" COLOR_RESET COLOR_MAGENTA " Philo %3zu" COLOR_RESET COLOR_PINK "    is sleeping" COLOR_RESET "\n", philosopher->shared_data->timestamp, philosopher->id);
     pthread_mutex_unlock(&philosopher->shared_data->print_mutex);
 }
@@ -60,6 +61,7 @@ void print_eating(t_philosopher *philosopher)
         return;
     }
     philosopher->shared_data->timestamp = get_timestamp_in_ms() - philosopher->shared_data->start_time;
+    philosopher->action_start_time = get_timestamp_in_ms();
     printf(COLOR_GREEN "%13ld" COLOR_RESET COLOR_MAGENTA " Philo %3zu" COLOR_RESET COLOR_BLUE "     is eating" COLOR_RESET "\n", philosopher->shared_data->timestamp, philosopher->id);
     pthread_mutex_unlock(&philosopher->shared_data->print_mutex);
 }
