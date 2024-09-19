@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 15:31:02 by max               #+#    #+#             */
-/*   Updated: 2024/09/18 18:10:21 by max              ###   ########.fr       */
+/*   Updated: 2024/09/20 00:32:04 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,18 +49,11 @@ static bool init_data_args(t_main_data *main_data, t_args *args, char **argv)
         return false;
     if (!have_philosopher(argv))
         return false;
-    args->number_of_philosophers = (int)ft_atoi(argv[1]);
-    args->time_to_die = (int)ft_atoi(argv[2]);
-    args->time_to_eat = (int)ft_atoi(argv[3]);
-    args->time_to_sleep = (int)ft_atoi(argv[4]);
-
-    if (argv[5])
-    {
-        args->number_of_times_each_philosopher_must_eat = (int)ft_atoi(argv[5]);
-        main_data->has_meal_limit = true;
-    }
-    else
+    init_args(args, argv);
+    if (!argv[5])
         args->number_of_times_each_philosopher_must_eat = -1;
+    else if (argv[5] && !init_meal_count(main_data, args, argv))
+        return false;
     if (!argument_size_validation(args))
         return false;
     return true;
