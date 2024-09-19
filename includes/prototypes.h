@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 13:22:08 by max               #+#    #+#             */
-/*   Updated: 2024/09/19 23:43:18 by max              ###   ########.fr       */
+/*   Updated: 2024/09/19 23:55:42 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,10 @@ void philosopher_eating(t_philosopher *philosopher);
 //---------------- philosopher actions utils --------------------
 void sleeping_usleep(t_philosopher *philosopher);
 void eating_usleep(t_philosopher *philosopher);
+void even_philosophers_take_fork(t_philosopher *philosopher, int left_fork, int right_fork);
+void odd_philosophers_take_fork(t_philosopher *philosopher, int left_fork, int right_fork);
+void update_meals_number(t_philosopher *philosopher);
+void update_last_eaten_timestamp(t_philosopher *philosopher);
 //------------------------ utils --------------------------------
 long int get_timestamp_in_ms();
 long int ft_atoi(char *str);

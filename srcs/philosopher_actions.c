@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 00:25:21 by max               #+#    #+#             */
-/*   Updated: 2024/09/19 23:42:19 by max              ###   ########.fr       */
+/*   Updated: 2024/09/19 23:56:16 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,27 +46,17 @@ void philosopher_take_forks(t_philosopher *philosopher)
         return;
     }
     if (philosopher->id % 2 == 0)
-    {
-        pthread_mutex_lock(&philosopher->shared_data->forks[left_fork]);
-        print_taking_forks(philosopher);
-        pthread_mutex_lock(&philosopher->shared_data->forks[right_fork]);
-        print_taking_forks(philosopher);
-    }
+        even_philosophers_take_fork(philosopher, left_fork, right_fork);
     else
-    {
-        pthread_mutex_lock(&philosopher->shared_data->forks[right_fork]);
-        print_taking_forks(philosopher);
-        pthread_mutex_lock(&philosopher->shared_data->forks[left_fork]);
-        print_taking_forks(philosopher);
-    }
+        odd_philosophers_take_fork(philosopher, left_fork, right_fork);
 }
 void philosopher_thinking(t_philosopher *philosopher)
 {
     long thinking_time;
-    
+
     if (philosopher->id % 2 == 0)
         thinking_time = 400;
-    
+
     else
         thinking_time = 200;
     print_thinking(philosopher);
@@ -87,16 +77,10 @@ void philosopher_eating(t_philosopher *philosopher)
             philosopher_realease_forks(philosopher);
         return;
     }
-    pthread_mutex_lock(&philosopher->shared_data->time);
-    philosopher->last_eaten_timestamp = get_timestamp_in_ms();
-    pthread_mutex_unlock(&philosopher->shared_data->time);
+    update_last_eaten_timestamp(philosopher);
     print_eating(philosopher);
     eating_usleep(philosopher);
     philosopher_realease_forks(philosopher);
     if (philosopher->meals_number > 0)
-    {
-        pthread_mutex_lock(&philosopher->shared_data->meals);
-        philosopher->meals_number--;
-        pthread_mutex_unlock(&philosopher->shared_data->meals);
-    }
+        update_meals_number(philosopher);
 }
