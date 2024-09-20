@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 00:25:21 by max               #+#    #+#             */
-/*   Updated: 2024/09/19 23:56:16 by max              ###   ########.fr       */
+/*   Updated: 2024/09/20 12:30:11 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,15 @@ void philosopher_take_forks(t_philosopher *philosopher)
 void philosopher_thinking(t_philosopher *philosopher)
 {
     long thinking_time;
+    int gap;
 
+    gap = (philosopher->shared_data->args.time_to_eat + philosopher->shared_data->args.time_to_sleep) / philosopher->shared_data->args.number_of_philosophers;
+    // printf("gap = %d\n",gap);
     if (philosopher->id % 2 == 0)
-        thinking_time = 400;
+        thinking_time = gap * 1000;
 
     else
-        thinking_time = 200;
+        thinking_time = (gap /2)* 1000;
     print_thinking(philosopher);
     usleep(thinking_time);
 }

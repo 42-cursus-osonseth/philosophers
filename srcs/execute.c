@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 08:11:17 by max               #+#    #+#             */
-/*   Updated: 2024/09/20 01:09:22 by max              ###   ########.fr       */
+/*   Updated: 2024/09/20 12:33:14 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,17 +56,18 @@ void monitoring_of_philosophers(t_main_data *main_data)
 
 void *philosopher_routine(void *arg)
 {
-
     t_philosopher *philosopher = (t_philosopher *)arg;
-    while (1)
+
+      while (1)
     {
-         pthread_mutex_lock(&philosopher->shared_data->start);
-         if (philosopher->shared_data->start_flag == true)
-         {
+        pthread_mutex_lock(&philosopher->shared_data->start);
+        if (philosopher->shared_data->start_flag == true)
+        {
             pthread_mutex_unlock(&philosopher->shared_data->start);
             break;
-         }
-         pthread_mutex_unlock(&philosopher->shared_data->start);
+        }
+        pthread_mutex_unlock(&philosopher->shared_data->start);
+        usleep(2);
     }
     update_last_eaten_timestamp(philosopher);
     while (1)
@@ -89,6 +90,7 @@ void execute(t_main_data *main_data)
     int i;
     pthread_t threads[main_data->shared_data.args.number_of_philosophers];
     i = 0;
+
     while (i < main_data->shared_data.args.number_of_philosophers)
     {
         if (pthread_create(&threads[i], NULL, philosopher_routine, &main_data->philosophers[i]) != 0)
