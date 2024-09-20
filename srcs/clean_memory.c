@@ -6,18 +6,33 @@
 /*   By: mmauchre <mmauchre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 18:41:48 by max               #+#    #+#             */
-/*   Updated: 2024/09/20 16:12:25 by mmauchre         ###   ########.fr       */
+/*   Updated: 2024/09/20 21:19:14 by mmauchre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	clean_philosopher(t_main_data *main_data)
+void	clean_array(t_main_data *main_data)
 {
 	if (main_data->philosophers)
 	{
 		free(main_data->philosophers);
 		main_data->philosophers = NULL;
+	}
+	if (main_data->shared_data.time_last_meal)
+	{
+		free(main_data->shared_data.time_last_meal);
+		main_data->shared_data.time_last_meal = NULL;
+	}
+	if (main_data->shared_data.meals_limit)
+	{
+		free(main_data->shared_data.meals_limit);
+		main_data->shared_data.meals_limit = NULL;
+	}
+	if (main_data->shared_data.forks)
+	{
+		free(main_data->shared_data.forks);
+		main_data->shared_data.forks = NULL;
 	}
 }
 
