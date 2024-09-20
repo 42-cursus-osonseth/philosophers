@@ -6,7 +6,7 @@
 /*   By: mmauchre <mmauchre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 00:25:21 by max               #+#    #+#             */
-/*   Updated: 2024/09/20 16:17:54 by mmauchre         ###   ########.fr       */
+/*   Updated: 2024/09/20 23:36:06 by mmauchre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ void	philosopher_thinking(t_philosopher *philosopher)
 			+ philosopher->shared_data->args.time_to_sleep)
 		/ philosopher->shared_data->args.number_of_philosophers;
 	if (philosopher->id % 2 == 0)
-		thinking_time = gap * 1000;
+		thinking_time = gap * 50;
 	else
-		thinking_time = (gap / 2) * 1000;
+		thinking_time = (gap / 2) * 50;
 	print_thinking(philosopher);
 	usleep(thinking_time);
 }

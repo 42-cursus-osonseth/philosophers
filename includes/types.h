@@ -6,7 +6,7 @@
 /*   By: mmauchre <mmauchre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 13:21:23 by max               #+#    #+#             */
-/*   Updated: 2024/09/20 21:19:35 by mmauchre         ###   ########.fr       */
+/*   Updated: 2024/09/20 22:56:25 by mmauchre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct s_main_data
 	bool			any_dead;
 	long int		time_since_last_meal;
 	int				meals;
+	pthread_t		*threads;
 	t_philosopher	*philosophers;
 	t_shared_data	shared_data;
 }					t_main_data;

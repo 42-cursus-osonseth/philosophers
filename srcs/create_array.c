@@ -6,7 +6,7 @@
 /*   By: mmauchre <mmauchre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 20:26:44 by mmauchre          #+#    #+#             */
-/*   Updated: 2024/09/20 21:21:55 by mmauchre         ###   ########.fr       */
+/*   Updated: 2024/09/20 23:03:49 by mmauchre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static bool	create_philosophers(t_main_data *main_data)
 			* main_data->shared_data.args.number_of_philosophers);
 	if (main_data->philosophers == NULL)
 	{
+		clean_array(main_data);
 		print_error("Malloc failed");
 		return (false);
 	}
@@ -65,12 +66,15 @@ static bool	create_meals_limit_mutex(t_main_data *main_data)
 
 bool	create_array(t_main_data *main_data)
 {
+	if (!create_thread_array(main_data))
+		return (false);
 	if (!create_philosophers(main_data))
 		return (false);
 	if (!create_forks_mutex(main_data))
 		return (false);
-	if (!create_time_last_meal_mutex)
+	if (!create_time_last_meal_mutex(main_data))
 		return (false);
-	if (!create_meals_limit_mutex)
+	if (!create_meals_limit_mutex(main_data))
 		return (false);
+	return (true);
 }

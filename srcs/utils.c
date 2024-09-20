@@ -6,7 +6,7 @@
 /*   By: mmauchre <mmauchre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 12:53:26 by max               #+#    #+#             */
-/*   Updated: 2024/09/20 16:20:14 by mmauchre         ###   ########.fr       */
+/*   Updated: 2024/09/20 23:11:39 by mmauchre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,10 @@ bool	philosopher_is_dead(t_philosopher *philosopher)
 
 void	update_last_eaten_timestamp(t_philosopher *philosopher)
 {
-	pthread_mutex_lock(&philosopher->shared_data->time);
+	int	i;
+
+	i = philosopher->id - 1;
+	pthread_mutex_lock(&philosopher->shared_data->time_last_meal[i]);
 	philosopher->last_eaten_timestamp = get_timestamp_in_ms();
-	pthread_mutex_unlock(&philosopher->shared_data->time);
+	pthread_mutex_unlock(&philosopher->shared_data->time_last_meal[i]);
 }

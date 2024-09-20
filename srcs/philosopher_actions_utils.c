@@ -6,7 +6,7 @@
 /*   By: mmauchre <mmauchre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 23:10:45 by max               #+#    #+#             */
-/*   Updated: 2024/09/20 16:37:30 by mmauchre         ###   ########.fr       */
+/*   Updated: 2024/09/20 23:14:12 by mmauchre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,10 @@ void	odd_philosophers_take_fork(t_philosopher *philosopher, int left_fork,
 
 void	update_meals_number(t_philosopher *philosopher)
 {
-	pthread_mutex_lock(&philosopher->shared_data->meals);
+	int	i;
+
+	i = philosopher->id - 1;
+	pthread_mutex_lock(&philosopher->shared_data->meals_limit[i]);
 	philosopher->meals_number--;
-	pthread_mutex_unlock(&philosopher->shared_data->meals);
+	pthread_mutex_unlock(&philosopher->shared_data->meals_limit[i]);
 }

@@ -6,7 +6,7 @@
 /*   By: mmauchre <mmauchre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 13:22:08 by max               #+#    #+#             */
-/*   Updated: 2024/09/20 22:26:56 by mmauchre         ###   ########.fr       */
+/*   Updated: 2024/09/20 23:01:24 by mmauchre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void		init_args(t_args *args, char **argv);
 bool		init_meal_count(t_main_data *main_data, t_args *args, char **argv);
 //-------------------- init data -------------------------------
 bool		create_array(t_main_data *main_data);
+bool		create_thread_array(t_main_data *main_data);
 bool		init_forks_mutex(t_main_data *main_data);
 bool		init_time_last_meal_mutex(t_main_data *main_data);
 bool		init_meals_limit_mutex(t_main_data *main_data);
