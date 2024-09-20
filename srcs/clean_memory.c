@@ -6,7 +6,7 @@
 /*   By: mmauchre <mmauchre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 18:41:48 by max               #+#    #+#             */
-/*   Updated: 2024/09/20 22:06:48 by mmauchre         ###   ########.fr       */
+/*   Updated: 2024/09/20 22:29:32 by mmauchre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,8 @@ void	clean_array(t_main_data *main_data)
 
 void	clean_and_destroy_all(t_main_data *main_data)
 {
-	destroy_forks_mutex(main_data);
-	destroy_time_last_meal_mutex(main_data);
-	destroy_meals_limit_mutex(main_data);
-
-
+	destroy_array_mutex(main_data);
+	destroy_mutex(main_data);
 	clean_array(main_data);
-	// destroy_print_mutex(main_data);
-	// destroy_death_mutex(main_data);
-	// destroy_time_mutex(main_data);
-	// destroy_meals_mutex(main_data);
-	// destroy_start_mutex(main_data);
-	// clean_forks_and_philosophers(main_data);
 }
+

@@ -6,7 +6,7 @@
 /*   By: mmauchre <mmauchre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 13:22:08 by max               #+#    #+#             */
-/*   Updated: 2024/09/20 22:05:12 by mmauchre         ###   ########.fr       */
+/*   Updated: 2024/09/20 22:26:56 by mmauchre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,10 @@ void		init_args(t_args *args, char **argv);
 bool		init_meal_count(t_main_data *main_data, t_args *args, char **argv);
 //-------------------- init data -------------------------------
 bool		create_array(t_main_data *main_data);
-bool		init_data(t_main_data *main_data);
-
-void		init_philosopher(t_main_data *main_data);
-
-//-------------------- init mutex ------------------------------
 bool		init_forks_mutex(t_main_data *main_data);
 bool		init_time_last_meal_mutex(t_main_data *main_data);
 bool		init_meals_limit_mutex(t_main_data *main_data);
-bool		init_print_mutex(t_main_data *main_data);
-bool		init_death_mutex(t_main_data *main_data);
-bool		init_time_mutex(t_main_data *main_data);
+bool		init_mutex(t_main_data *main_data);
 //---------------------- execute -------------------------------
 void		monitoring_of_philosophers(t_main_data *main_data);
 void		*philosopher_routine(void *arg);
@@ -72,9 +65,11 @@ void		destroy_partial_meals_limit_mutexs(t_main_data *main_data,
 void		destroy_forks_mutex(t_main_data *main_data);
 void		destroy_time_last_meal_mutex(t_main_data *main_data);
 void		destroy_meals_limit_mutex(t_main_data *main_data);
+void		destroy_array_mutex(t_main_data *main_data);
 void		destroy_print_mutex(t_main_data *main_data);
 void		destroy_death_mutex(t_main_data *main_data);
-void		destroy_time_mutex(t_main_data *main_data);
+void		destroy_start_mutex(t_main_data *main_data);
+void		destroy_mutex(t_main_data *main_data);
 void		clean_array(t_main_data *main_data);
 void		clean_and_destroy_all(t_main_data *main_data);
 //----------------------- print -------------------------------

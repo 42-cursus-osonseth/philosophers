@@ -19,7 +19,7 @@ DEPDIR 			= ./dep/
 
 SRCNAME			= main.c \ 
 				  parse.c check_args.c \
-				  create_and_init_data.c init_mutex.c init_data.c init_array_mutex.c \
+				  create_and_init_data.c init_mutex.c init_array_mutex.c \
 				  create_array.c \
 				  execute.c philosopher_actions.c \
 				  print_error.c print_state.c \

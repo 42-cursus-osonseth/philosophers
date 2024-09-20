@@ -6,7 +6,7 @@
 /*   By: mmauchre <mmauchre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 21:35:23 by mmauchre          #+#    #+#             */
-/*   Updated: 2024/09/20 22:02:13 by mmauchre         ###   ########.fr       */
+/*   Updated: 2024/09/20 22:24:29 by mmauchre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,11 @@ void	destroy_meals_limit_mutex(t_main_data *main_data)
 	i = 0;
 	while (i < main_data->shared_data.args.number_of_philosophers)
 		pthread_mutex_destroy(&main_data->shared_data.meals_limit[i++]);
+}
+
+void	destroy_array_mutex(t_main_data *main_data)
+{
+	destroy_forks_mutex(main_data);
+	destroy_time_last_meal_mutex(main_data);
+	destroy_meals_limit_mutex(main_data);
 }
