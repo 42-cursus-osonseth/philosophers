@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: mmauchre <mmauchre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 07:36:02 by max               #+#    #+#             */
-/*   Updated: 2024/08/31 22:05:16 by max              ###   ########.fr       */
+/*   Updated: 2024/09/20 16:09:05 by mmauchre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
-#define PHILO_H
+# define PHILO_H
 
-#include "config.h"
-#include "types.h"
-#include "prototypes.h"
+# include "config.h"
+# include "prototypes.h"
+# include "types.h"
 
 #endif
