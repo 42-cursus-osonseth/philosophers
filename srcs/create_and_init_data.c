@@ -6,7 +6,7 @@
 /*   By: mmauchre <mmauchre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 10:03:21 by max               #+#    #+#             */
-/*   Updated: 2024/09/20 21:24:08 by mmauchre         ###   ########.fr       */
+/*   Updated: 2024/09/20 21:27:04 by mmauchre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,8 @@ bool	create_and_init_data(t_main_data *main_data)
 {
 	if (!create_array(main_data))
 		return (false);
-	
-	
-	
+	if (!init_data)
+		return (false);
 	if (!init_mutex(main_data))
 		return (false);
 	return (true);
