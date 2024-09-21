@@ -6,7 +6,7 @@
 /*   By: mmauchre <mmauchre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 08:11:17 by max               #+#    #+#             */
-/*   Updated: 2024/09/21 15:25:45 by mmauchre         ###   ########.fr       */
+/*   Updated: 2024/09/21 16:08:53 by mmauchre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	handle_philosopher_is_dead(t_main_data *main_data, int i)
 	pthread_mutex_unlock(&main_data->shared_data.death);
 	main_data->any_dead = true;
 	pthread_mutex_lock(&main_data->shared_data.print_mutex);
-	printf(COLOR_RED "%13ld" COLOR_RESET COLOR_RED " %3zu"\
+	printf(COLOR_RED "%13ld" COLOR_RESET COLOR_RED "%3zu"
 		COLOR_RESET COLOR_RED " IS DEAD !" COLOR_RESET "\n",
 		get_timestamp_in_ms() - main_data->shared_data.start_time,
 		philosophers[i].id);
@@ -84,11 +84,24 @@ void	*philosopher_routine(void *arg)
 	return (NULL);
 }
 
+void	init_time_last_meal(t_main_data *main_data)
+{
+	int	i;
+
+	i = 0;
+	while (i < main_data->shared_data.args.number_of_philosophers)
+	{
+		main_data->philosophers[i].last_eaten_timestamp = get_timestamp_in_ms();
+		i++;
+	}
+}
+
 void	execute(t_main_data *main_data)
 {
 	pthread_mutex_lock(&(main_data->shared_data.start));
 	create_threads(main_data);
 	main_data->shared_data.start_time = get_timestamp_in_ms();
+	init_time_last_meal(main_data);
 	pthread_mutex_unlock(&(main_data->shared_data.start));
 	usleep(5000);
 	monitoring_of_philosophers(main_data);
