@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmauchre <mmauchre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 08:11:17 by max               #+#    #+#             */
-/*   Updated: 2024/09/20 23:41:00 by mmauchre         ###   ########.fr       */
+/*   Updated: 2024/09/21 05:09:48 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void	execute(t_main_data *main_data)
 	}
 	main_data->shared_data.start_time = get_timestamp_in_ms();
 	pthread_mutex_unlock(&(main_data->shared_data.start));
-	usleep(1000);
+	usleep(5000);
 	monitoring_of_philosophers(main_data);
 	i = 0;
 	while (i < main_data->shared_data.args.number_of_philosophers)
