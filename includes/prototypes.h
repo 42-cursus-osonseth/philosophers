@@ -6,7 +6,7 @@
 /*   By: mmauchre <mmauchre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 13:22:08 by max               #+#    #+#             */
-/*   Updated: 2024/09/20 23:01:24 by mmauchre         ###   ########.fr       */
+/*   Updated: 2024/09/21 15:14:11 by mmauchre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ bool		init_mutex(t_main_data *main_data);
 void		monitoring_of_philosophers(t_main_data *main_data);
 void		*philosopher_routine(void *arg);
 void		execute(t_main_data *main_data);
+void		create_threads(t_main_data *main_data);
+void		join_threads(t_main_data *main_data);
 //------------------- execute utils ----------------------------
 void		update_time_since_last_meal(t_main_data *main_data, int i);
 void		update_limit_meals(t_main_data *main_data, int i);

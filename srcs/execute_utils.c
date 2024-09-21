@@ -6,7 +6,7 @@
 /*   By: mmauchre <mmauchre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 08:21:10 by max               #+#    #+#             */
-/*   Updated: 2024/09/20 23:09:29 by mmauchre         ###   ########.fr       */
+/*   Updated: 2024/09/21 15:14:20 by mmauchre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,37 @@ void	handle_one_philosopher(t_philosopher *philosopher)
 	while (!philosopher_is_dead(philosopher))
 		usleep(50);
 	pthread_mutex_unlock(&philosopher->shared_data->forks[0]);
+}
+
+void	create_threads(t_main_data *main_data)
+{
+	int	i;
+
+	i = 0;
+	while (i < main_data->shared_data.args.number_of_philosophers)
+	{
+		if (pthread_create(&(main_data->threads)[i], NULL, philosopher_routine,
+			&main_data->philosophers[i]) != 0)
+		{
+			print_error("Thread creation failed");
+			return ;
+		}
+		i++;
+	}
+}
+
+void	join_threads(t_main_data *main_data)
+{
+	int	i;
+
+	i = 0;
+	while (i < main_data->shared_data.args.number_of_philosophers)
+	{
+		if (pthread_join(main_data->threads[i], NULL) != 0)
+		{
+			print_error("Thread join failed");
+			return ;
+		}
+		i++;
+	}
 }
