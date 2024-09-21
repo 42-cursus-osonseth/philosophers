@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   print_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: mmauchre <mmauchre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 19:35:45 by max               #+#    #+#             */
-/*   Updated: 2024/08/29 21:53:35 by max              ###   ########.fr       */
+/*   Updated: 2024/09/20 16:18:02 by mmauchre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void print_error (char * str)
+void	print_error(char *str)
 {
-    printf(COLOR_RED"%s"COLOR_RESET"\n", str);
+	printf(COLOR_RED "%s" COLOR_RESET "\n", str);
 }
