@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosopher_actions_utils.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmauchre <mmauchre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 23:10:45 by max               #+#    #+#             */
-/*   Updated: 2024/09/20 23:14:12 by mmauchre         ###   ########.fr       */
+/*   Updated: 2024/09/23 00:11:46 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	sleeping_usleep(t_philosopher *philosopher)
 	while (philosopher->action_time_elapsed < philosopher
 		->shared_data->args.time_to_sleep)
 	{
+		if (philosopher_is_dead(philosopher))
+			break;
 		usleep(50);
 		philosopher->action_current_time = get_timestamp_in_ms();
 		philosopher->action_time_elapsed = philosopher->action_current_time
@@ -31,6 +33,8 @@ void	eating_usleep(t_philosopher *philosopher)
 	while (philosopher->action_time_elapsed < philosopher
 		->shared_data->args.time_to_eat)
 	{
+		if (philosopher_is_dead(philosopher))
+			break;
 		usleep(50);
 		philosopher->action_current_time = get_timestamp_in_ms();
 		philosopher->action_time_elapsed = philosopher->action_current_time
