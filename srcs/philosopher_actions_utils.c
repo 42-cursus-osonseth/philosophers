@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 23:10:45 by max               #+#    #+#             */
-/*   Updated: 2024/09/23 00:11:46 by max              ###   ########.fr       */
+/*   Updated: 2024/09/23 16:20:44 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	sleeping_usleep(t_philosopher *philosopher)
 	{
 		if (philosopher_is_dead(philosopher))
 			break;
-		usleep(50);
+		usleep(300);
 		philosopher->action_current_time = get_timestamp_in_ms();
 		philosopher->action_time_elapsed = philosopher->action_current_time
 			- philosopher->action_start_time;
@@ -35,7 +35,7 @@ void	eating_usleep(t_philosopher *philosopher)
 	{
 		if (philosopher_is_dead(philosopher))
 			break;
-		usleep(50);
+		usleep(300);
 		philosopher->action_current_time = get_timestamp_in_ms();
 		philosopher->action_time_elapsed = philosopher->action_current_time
 			- philosopher->action_start_time;
