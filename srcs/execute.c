@@ -6,7 +6,7 @@
 /*   By: mmauchre <mmauchre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 08:11:17 by max               #+#    #+#             */
-/*   Updated: 2024/09/23 18:51:12 by mmauchre         ###   ########.fr       */
+/*   Updated: 2024/09/23 19:17:40 by mmauchre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,22 @@ void	monitoring_of_philosophers(t_main_data *main_data)
 
 	while (1)
 	{
+		usleep(100);
 		i = 0;
 		main_data->meals = 0;
 		while (i++ < main_data->shared_data.args.number_of_philosophers)
 		{
 			update_time_since_last_meal(main_data, i - 1);
+			pthread_mutex_lock(&main_data->shared_data.meals_limit[i]);
 			if (main_data->philosophers[i].meals_number != 0 && main_data
 				->time_since_last_meal >= main_data
 				->shared_data.args.time_to_die)
 			{
+				pthread_mutex_unlock(&main_data->shared_data.meals_limit[i]);
 				handle_philosopher_is_dead(main_data, i - 1);
 				break ;
 			}
+			pthread_mutex_unlock(&main_data->shared_data.meals_limit[i]);
 			update_limit_meals(main_data, i - 1);
 		}
 		if (check_death_and_meals_limit(main_data))
