@@ -6,11 +6,23 @@
 /*   By: mmauchre <mmauchre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 07:35:54 by max               #+#    #+#             */
-/*   Updated: 2024/09/20 23:00:45 by mmauchre         ###   ########.fr       */
+/*   Updated: 2024/09/23 18:48:02 by mmauchre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+bool	check_death_and_meals_limit(t_main_data *main_data)
+{
+	if (main_data->any_dead)
+		return (true);
+	if (main_data->has_meal_limit && main_data->meals == 0)
+	{
+		print_simulation_stop(main_data);
+		return (true);
+	}
+	return (false);
+}
 
 bool	create_thread_array(t_main_data *main_data)
 {

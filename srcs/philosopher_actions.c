@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosopher_actions.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: mmauchre <mmauchre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 00:25:21 by max               #+#    #+#             */
-/*   Updated: 2024/09/23 16:24:43 by max              ###   ########.fr       */
+/*   Updated: 2024/09/23 18:44:07 by mmauchre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ void	philosopher_thinking(t_philosopher *philosopher)
 	print_thinking(philosopher);
 	usleep(thinking_time);
 }
-
 
 void	philosopher_sleeping(t_philosopher *philosopher)
 {
