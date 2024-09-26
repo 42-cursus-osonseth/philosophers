@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 08:11:17 by max               #+#    #+#             */
-/*   Updated: 2024/09/26 13:42:53 by max              ###   ########.fr       */
+/*   Updated: 2024/09/26 14:52:22 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ void	handle_philosopher_is_dead(t_main_data *main_data, int i)
 void	monitoring_of_philosophers(t_main_data *main_data)
 {
 	int	i;
-	int	limit;
+	bool reached_meals;
 
-	limit = -1;
+	reached_meals = false;
 	while (1)
 	{
 		i = 0;
@@ -44,15 +44,14 @@ void	monitoring_of_philosophers(t_main_data *main_data)
 		{
 			update_time_since_last_meal(main_data, i - 1);
 			if (main_data->has_meal_limit)
-				limit = update_limit(main_data, i - 1);
-			if (limit != 0 && main_data->time_since_last_meal >= main_data
+				reached_meals = update_limit(main_data, i - 1);
+			if (!reached_meals && main_data->time_since_last_meal > main_data
 				->shared_data.args.time_to_die)
 			{
 				handle_philosopher_is_dead(main_data, i - 1);
 				break ;
 			}
-			if (main_data->has_meal_limit)
-				update_limit_meals(main_data, i - 1);
+		
 		}
 		if (check_death_and_meals_limit(main_data))
 			break ;
