@@ -6,7 +6,7 @@
 /*   By: mmauchre <mmauchre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 13:22:08 by max               #+#    #+#             */
-/*   Updated: 2024/09/23 18:48:27 by mmauchre         ###   ########.fr       */
+/*   Updated: 2024/09/23 19:44:13 by mmauchre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void		update_time_since_last_meal(t_main_data *main_data, int i);
 void		update_limit_meals(t_main_data *main_data, int i);
 void		handle_one_philosopher(t_philosopher *philosopher);
 bool		check_death_and_meals_limit(t_main_data *main_data);
+int			update_limit(t_main_data *main_data, int i);
 //------------------ philosopher actions ------------------------
 void		philosopher_realease_forks(t_philosopher *philosopher);
 void		philosopher_take_forks(t_philosopher *philosopher);

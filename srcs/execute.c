@@ -6,7 +6,7 @@
 /*   By: mmauchre <mmauchre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 08:11:17 by max               #+#    #+#             */
-/*   Updated: 2024/09/23 19:17:40 by mmauchre         ###   ########.fr       */
+/*   Updated: 2024/09/23 20:45:27 by mmauchre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	handle_philosopher_is_dead(t_main_data *main_data, int i)
 	pthread_mutex_unlock(&main_data->shared_data.death);
 	main_data->any_dead = true;
 	pthread_mutex_lock(&main_data->shared_data.print_mutex);
-	printf(COLOR_RED "%13ld" COLOR_RESET COLOR_RED "%3zu"
+	printf(COLOR_RED "%13ld" COLOR_RESET COLOR_RED " %3zu"
 		COLOR_RESET COLOR_RED " IS DEAD !" COLOR_RESET "\n",
 		get_timestamp_in_ms() - main_data->shared_data.start_time,
 		philosophers[i].id);
@@ -33,26 +33,25 @@ void	handle_philosopher_is_dead(t_main_data *main_data, int i)
 void	monitoring_of_philosophers(t_main_data *main_data)
 {
 	int	i;
+	int	limit;
 
 	while (1)
 	{
-		usleep(100);
 		i = 0;
 		main_data->meals = 0;
 		while (i++ < main_data->shared_data.args.number_of_philosophers)
 		{
 			update_time_since_last_meal(main_data, i - 1);
-			pthread_mutex_lock(&main_data->shared_data.meals_limit[i]);
-			if (main_data->philosophers[i].meals_number != 0 && main_data
-				->time_since_last_meal >= main_data
+			if (main_data->has_meal_limit)
+				limit = update_limit(main_data, i - 1);
+			if (limit != 0 && main_data->time_since_last_meal >= main_data
 				->shared_data.args.time_to_die)
 			{
-				pthread_mutex_unlock(&main_data->shared_data.meals_limit[i]);
 				handle_philosopher_is_dead(main_data, i - 1);
 				break ;
 			}
-			pthread_mutex_unlock(&main_data->shared_data.meals_limit[i]);
-			update_limit_meals(main_data, i - 1);
+			if (main_data->has_meal_limit)
+				update_limit_meals(main_data, i - 1);
 		}
 		if (check_death_and_meals_limit(main_data))
 			break ;

@@ -6,11 +6,21 @@
 /*   By: mmauchre <mmauchre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 07:35:54 by max               #+#    #+#             */
-/*   Updated: 2024/09/23 19:17:28 by mmauchre         ###   ########.fr       */
+/*   Updated: 2024/09/23 20:15:55 by mmauchre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+int	update_limit(t_main_data *main_data, int i)
+{
+	int	limit;
+
+	pthread_mutex_lock(&main_data->shared_data.meals_limit[i]);
+	limit = main_data->philosophers[i].meals_number;
+	pthread_mutex_unlock(&main_data->shared_data.meals_limit[i]);
+	return (limit);
+}
 
 bool	check_death_and_meals_limit(t_main_data *main_data)
 {
