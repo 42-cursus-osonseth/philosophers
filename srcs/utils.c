@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 12:53:26 by max               #+#    #+#             */
-/*   Updated: 2024/09/28 06:22:58 by max              ###   ########.fr       */
+/*   Updated: 2024/09/28 06:29:07 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	update_last_eaten_timestamp(t_philosopher *philosopher)
 
 	i = philosopher->id - 1;
 	pthread_mutex_lock(&philosopher->shared_data->time_last_meal[i]);
-	philosopher->last_eaten_timestamp = get_timestamp_in_ms();
+	philosopher->last_eaten_timestamp = get_timestamp_in_us();
 	pthread_mutex_unlock(&philosopher->shared_data->time_last_meal[i]);
 }
 

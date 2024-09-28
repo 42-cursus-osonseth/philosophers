@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 08:11:17 by max               #+#    #+#             */
-/*   Updated: 2024/09/27 21:54:37 by max              ###   ########.fr       */
+/*   Updated: 2024/09/28 06:58:45 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	monitoring_of_philosophers(t_main_data *main_data)
 			if (main_data->has_meal_limit)
 				reached_meals = update_limit(main_data, i - 1);
 			if (!reached_meals && main_data->time_since_last_meal > main_data
-				->shared_data.args.time_to_die)
+				->shared_data.args.time_to_die * 1000)
 			{
 				handle_philosopher_is_dead(main_data, i - 1);
 				break ;
@@ -90,7 +90,7 @@ void	init_time_last_meal(t_main_data *main_data)
 	i = 0;
 	while (i < main_data->shared_data.args.number_of_philosophers)
 	{
-		main_data->philosophers[i].last_eaten_timestamp = get_timestamp_in_ms();
+		main_data->philosophers[i].last_eaten_timestamp = get_timestamp_in_us();
 		i++;
 	}
 }
