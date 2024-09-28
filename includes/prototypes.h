@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 13:22:08 by max               #+#    #+#             */
-/*   Updated: 2024/09/27 21:54:03 by max              ###   ########.fr       */
+/*   Updated: 2024/09/28 06:21:19 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 #define PROTOTYPES_H
 
 #include "types.h"
-
-long int get_precise_timestamp_in_ms(void);
 
 //---------------------- parsing -------------------------------
 bool parse(t_main_data *main_data, int argc, char **argv);
@@ -61,6 +59,7 @@ void update_meals_number(t_philosopher *philosopher);
 void update_last_eaten_timestamp(t_philosopher *philosopher);
 //------------------------ utils --------------------------------
 long int get_timestamp_in_ms(void);
+long int get_precise_timestamp_in_ms(void);
 long int ft_atoi(char *str);
 bool philosopher_is_dead(t_philosopher *philosopher);
 //--------------------- cleaning -------------------------------

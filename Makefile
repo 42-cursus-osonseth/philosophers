@@ -24,6 +24,7 @@ SRCNAME			= main.c \
 				  execute.c philosopher_actions.c \
 				  print_error.c print_state.c \
 				  utils.c execute_utils.c parse_utils.c philosopher_actions_utils.c \
+				  get_time.c \
 				  clean_memory.c destroy_mutex.c destroy_partial_mutex.c destroy_array_mutex.c
 
 

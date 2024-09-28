@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 10:03:21 by max               #+#    #+#             */
-/*   Updated: 2024/09/26 14:08:45 by max              ###   ########.fr       */
+/*   Updated: 2024/09/28 06:22:22 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,17 @@ static bool	init_data(t_main_data *main_data)
 		return (false);
 	if (!init_mutex(main_data))
 		return (false);
+	return (true);
+}
+
+bool create_thread_array(t_main_data *main_data)
+{
+	main_data->threads = malloc(sizeof(pthread_t) * main_data->shared_data.args.number_of_philosophers);
+	if (main_data->threads == NULL)
+	{
+		print_error("Malloc failed");
+		return (false);
+	}
 	return (true);
 }
 
