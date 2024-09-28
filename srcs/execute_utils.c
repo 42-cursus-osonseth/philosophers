@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: mmauchre <mmauchre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 08:21:10 by max               #+#    #+#             */
-/*   Updated: 2024/09/28 06:30:34 by max              ###   ########.fr       */
+/*   Updated: 2024/09/28 11:21:12 by mmauchre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ void	update_time_since_last_meal(t_main_data *main_data, int i)
 
 int	update_limit_meals(t_main_data *main_data)
 {
-	int meals_completed;
-    
-	pthread_mutex_lock(&main_data->shared_data.meals_completed);
-	meals_completed = main_data->philosophers->shared_data->philosophers_meals_completed;
-	pthread_mutex_unlock(&main_data->shared_data.meals_completed);
+	int	meals_completed;
 
-	return meals_completed;
+	pthread_mutex_lock(&main_data->shared_data.meals_completed);
+	meals_completed = main_data->philosophers->shared_data
+		->philosophers_meals_completed;
+	pthread_mutex_unlock(&main_data->shared_data.meals_completed);
+	return (meals_completed);
 }
 
 void	handle_one_philosopher(t_philosopher *philosopher)

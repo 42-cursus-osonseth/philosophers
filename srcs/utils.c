@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: mmauchre <mmauchre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 12:53:26 by max               #+#    #+#             */
-/*   Updated: 2024/09/28 06:29:07 by max              ###   ########.fr       */
+/*   Updated: 2024/09/28 11:16:07 by mmauchre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	ft_strlen(char *str)
 		i++;
 	return (i);
 }
-
 
 long int	ft_atoi(char *str)
 {
@@ -62,15 +61,15 @@ void	update_last_eaten_timestamp(t_philosopher *philosopher)
 	pthread_mutex_unlock(&philosopher->shared_data->time_last_meal[i]);
 }
 
-bool check_death_and_meals_limit(t_main_data *main_data)
+bool	check_death_and_meals_limit(t_main_data *main_data)
 {
-	int meals_completed;
+	int	meals_completed;
 
 	meals_completed = update_limit_meals(main_data);
-
 	if (main_data->any_dead)
 		return (true);
-	if (main_data->has_meal_limit && meals_completed == main_data->shared_data.args.number_of_philosophers)
+	if (main_data->has_meal_limit && meals_completed
+		== main_data->shared_data.args.number_of_philosophers)
 	{
 		print_simulation_stop(main_data);
 		return (true);
