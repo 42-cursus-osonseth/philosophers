@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 00:25:21 by max               #+#    #+#             */
-/*   Updated: 2024/09/28 06:59:07 by max              ###   ########.fr       */
+/*   Updated: 2024/09/28 10:14:50 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,22 @@ void philosopher_thinking(t_philosopher *philosopher)
 	long thinking_time;
 	int gap;
 
+	gap = (philosopher->shared_data->args.time_to_eat + philosopher->shared_data->args.time_to_sleep) / philosopher->shared_data->args.number_of_philosophers;
 	if (philosopher->shared_data->args.number_of_philosophers % 2 == 0)
 		print_thinking(philosopher);
+
+	else if (philosopher->shared_data->args.number_of_philosophers > 14 )
+	{
+		
+		if (philosopher->id % 2 == 0)
+			thinking_time = gap * 20;
+		else
+			thinking_time = (gap / 2) * 20;
+		print_thinking(philosopher);
+		usleep(thinking_time);
+	}
 	else
 	{
-		gap = (philosopher->shared_data->args.time_to_eat + philosopher->shared_data->args.time_to_sleep) / philosopher->shared_data->args.number_of_philosophers;
 		if (philosopher->id % 2 == 0)
 			thinking_time = gap * 5;
 		else
