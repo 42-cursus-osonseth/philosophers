@@ -3,28 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmauchre <mmauchre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 07:35:54 by max               #+#    #+#             */
-/*   Updated: 2024/09/20 23:00:45 by mmauchre         ###   ########.fr       */
+/*   Updated: 2024/09/28 06:23:07 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-bool	create_thread_array(t_main_data *main_data)
+
+int update_limit(t_main_data *main_data, int i)
 {
-	main_data->threads = malloc(sizeof(pthread_t)
-			* main_data->shared_data.args.number_of_philosophers);
-	if (main_data->threads == NULL)
-	{
-		print_error("Malloc failed");
-		return (false);
-	}
-	return (true);
+	bool reached_meals_limit;
+
+	pthread_mutex_lock(&main_data->shared_data.meals_limit[i]);
+	reached_meals_limit = main_data->philosophers[i].meals_limit_reached;
+	pthread_mutex_unlock(&main_data->shared_data.meals_limit[i]);
+	return (reached_meals_limit);
 }
 
-int	main(int argc, char **argv)
+int main(int argc, char **argv)
 {
 	t_main_data(main_data) = {0};
 	if (parse(&main_data, argc, argv))

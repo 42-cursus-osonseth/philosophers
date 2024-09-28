@@ -6,7 +6,7 @@
 /*   By: mmauchre <mmauchre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 15:31:02 by max               #+#    #+#             */
-/*   Updated: 2024/09/20 16:16:37 by mmauchre         ###   ########.fr       */
+/*   Updated: 2024/09/21 15:28:27 by mmauchre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static bool	have_philosopher(char **argv)
 	if (argv[1][0] == '0')
 	{
 		print_error("Error: The simulation cannot start because the number of\
-        philosophers is 0.");
+philosophers is 0.");
 		return (false);
 	}
 	return (true);
@@ -42,7 +42,7 @@ static bool	argument_size_validation(t_args *args)
 		|| args->number_of_times_each_philosopher_must_eat == OVERFLOW)
 	{
 		print_error("The size of the arguments must be between 0 and INT MAX\n\
-        Please enter a valid size of the arguments");
+Please enter a valid size of the arguments");
 		return (false);
 	}
 	return (true);
