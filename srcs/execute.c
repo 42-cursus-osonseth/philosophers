@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 08:11:17 by max               #+#    #+#             */
-/*   Updated: 2024/09/26 14:52:22 by max              ###   ########.fr       */
+/*   Updated: 2024/09/27 21:54:37 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	execute(t_main_data *main_data)
 	pthread_mutex_lock(&(main_data->shared_data.start));
 	create_threads(main_data);
 	init_time_last_meal(main_data);
-	main_data->shared_data.start_time = get_timestamp_in_ms();
+	main_data->shared_data.start_time = get_precise_timestamp_in_ms();
 	pthread_mutex_unlock(&(main_data->shared_data.start));
 	usleep(5000);
 	monitoring_of_philosophers(main_data);

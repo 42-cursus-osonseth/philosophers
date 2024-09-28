@@ -6,11 +6,26 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 07:35:54 by max               #+#    #+#             */
-/*   Updated: 2024/09/26 14:36:42 by max              ###   ########.fr       */
+/*   Updated: 2024/09/27 21:57:28 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+long int get_precise_timestamp_in_ms(void)
+{
+    struct timeval tv;
+
+    // Boucle jusqu'à ce que la partie microsecondes soit proche de 0
+    while (1)
+    {
+        gettimeofday(&tv, NULL);
+        if (tv.tv_usec < 10) // Ici, on vérifie si on est proche du début d'une nouvelle milliseconde
+            break;
+    }
+
+    return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
+}
 
 int update_limit(t_main_data *main_data, int i)
 {

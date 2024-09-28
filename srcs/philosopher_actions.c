@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosopher_actions.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmauchre <mmauchre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 00:25:21 by max               #+#    #+#             */
-/*   Updated: 2024/09/23 20:32:05 by mmauchre         ###   ########.fr       */
+/*   Updated: 2024/09/27 14:25:21 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,18 +53,18 @@ void	philosopher_take_forks(t_philosopher *philosopher)
 
 void	philosopher_thinking(t_philosopher *philosopher)
 {
-	long	thinking_time;
-	int		gap;
+	// long	thinking_time;
+	// int		gap;
 
-	gap = (philosopher->shared_data->args.time_to_eat
-			+ philosopher->shared_data->args.time_to_sleep)
-		/ philosopher->shared_data->args.number_of_philosophers;
-	if (philosopher->id % 2 == 0)
-		thinking_time = gap * 15;
-	else
-		thinking_time = (gap / 2) * 15;
+	// gap = (philosopher->shared_data->args.time_to_eat
+	// 		+ philosopher->shared_data->args.time_to_sleep)
+	// 	/ philosopher->shared_data->args.number_of_philosophers;
+	// if (philosopher->id % 2 == 0)
+	// 	thinking_time = gap * 15;
+	// else
+	// 	thinking_time = (gap / 2) * 15;
 	print_thinking(philosopher);
-	usleep(thinking_time);
+	// usleep(thinking_time);
 }
 
 void	philosopher_sleeping(t_philosopher *philosopher)
