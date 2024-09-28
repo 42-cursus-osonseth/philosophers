@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 08:11:17 by max               #+#    #+#             */
-/*   Updated: 2024/09/28 06:58:45 by max              ###   ########.fr       */
+/*   Updated: 2024/09/28 08:10:43 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	monitoring_of_philosophers(t_main_data *main_data)
 
 	reached_meals = false;
 	while (1)
-	{
+	{	
 		i = 0;
 		main_data->meals = 0;
 		while (i++ < main_data->shared_data.args.number_of_philosophers)
