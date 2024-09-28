@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: mmauchre <mmauchre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 08:11:17 by max               #+#    #+#             */
-/*   Updated: 2024/09/28 08:10:43 by max              ###   ########.fr       */
+/*   Updated: 2024/09/28 11:19:38 by mmauchre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	handle_philosopher_is_dead(t_main_data *main_data, int i)
 	pthread_mutex_unlock(&main_data->shared_data.death);
 	main_data->any_dead = true;
 	pthread_mutex_lock(&main_data->shared_data.print_mutex);
-	printf(COLOR_RED "%13ld" COLOR_RESET COLOR_RED " %3zu"
+	printf(COLOR_RED "%13ld" COLOR_RESET COLOR_RED "%3zu"
 		COLOR_RESET COLOR_RED " IS DEAD !" COLOR_RESET "\n",
 		get_timestamp_in_ms() - main_data->shared_data.start_time,
 		philosophers[i].id);
@@ -32,12 +32,12 @@ void	handle_philosopher_is_dead(t_main_data *main_data, int i)
 
 void	monitoring_of_philosophers(t_main_data *main_data)
 {
-	int	i;
-	bool reached_meals;
+	int		i;
+	bool	reached_meals;
 
 	reached_meals = false;
 	while (1)
-	{	
+	{
 		i = 0;
 		main_data->meals = 0;
 		while (i++ < main_data->shared_data.args.number_of_philosophers)
@@ -45,13 +45,13 @@ void	monitoring_of_philosophers(t_main_data *main_data)
 			update_time_since_last_meal(main_data, i - 1);
 			if (main_data->has_meal_limit)
 				reached_meals = update_limit(main_data, i - 1);
-			if (!reached_meals && main_data->time_since_last_meal > main_data
-				->shared_data.args.time_to_die * 1000)
+			if (!reached_meals && main_data->time_since_last_meal
+				> main_data->shared_data.args.time_to_die
+				* 1000)
 			{
 				handle_philosopher_is_dead(main_data, i - 1);
 				break ;
 			}
-		
 		}
 		if (check_death_and_meals_limit(main_data))
 			break ;

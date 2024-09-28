@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_and_init_data.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: mmauchre <mmauchre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 10:03:21 by max               #+#    #+#             */
-/*   Updated: 2024/09/28 06:22:22 by max              ###   ########.fr       */
+/*   Updated: 2024/09/28 11:18:05 by mmauchre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,10 @@ static bool	init_data(t_main_data *main_data)
 	return (true);
 }
 
-bool create_thread_array(t_main_data *main_data)
+bool	create_thread_array(t_main_data *main_data)
 {
-	main_data->threads = malloc(sizeof(pthread_t) * main_data->shared_data.args.number_of_philosophers);
+	main_data->threads = malloc(sizeof(pthread_t) * main_data->shared_data
+			.args.number_of_philosophers);
 	if (main_data->threads == NULL)
 	{
 		print_error("Malloc failed");

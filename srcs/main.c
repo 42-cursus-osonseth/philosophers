@@ -3,19 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: mmauchre <mmauchre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 07:35:54 by max               #+#    #+#             */
-/*   Updated: 2024/09/28 06:23:07 by max              ###   ########.fr       */
+/*   Updated: 2024/09/28 11:15:25 by mmauchre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-
-int update_limit(t_main_data *main_data, int i)
+int	update_limit(t_main_data *main_data, int i)
 {
-	bool reached_meals_limit;
+	bool	reached_meals_limit;
 
 	pthread_mutex_lock(&main_data->shared_data.meals_limit[i]);
 	reached_meals_limit = main_data->philosophers[i].meals_limit_reached;
@@ -23,7 +22,7 @@ int update_limit(t_main_data *main_data, int i)
 	return (reached_meals_limit);
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_main_data(main_data) = {0};
 	if (parse(&main_data, argc, argv))
