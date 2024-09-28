@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmauchre <mmauchre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 08:11:17 by max               #+#    #+#             */
-/*   Updated: 2024/09/28 11:19:38 by mmauchre         ###   ########.fr       */
+/*   Updated: 2024/09/29 00:17:19 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	*philosopher_routine(void *arg)
 	pthread_mutex_lock(&(philosopher->shared_data->start));
 	pthread_mutex_unlock(&(philosopher->shared_data->start));
 	if (philosopher->id % 2 == 0)
-		usleep(100);
+		usleep(800);
 	update_last_eaten_timestamp(philosopher);
 	while (1)
 	{
